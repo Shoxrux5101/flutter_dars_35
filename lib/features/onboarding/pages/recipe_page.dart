@@ -13,6 +13,7 @@ class RecipePage extends StatelessWidget {
     super.key, required this.catId,
   });
 final int catId;
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -26,6 +27,42 @@ final int catId;
             padding: EdgeInsets.symmetric(horizontal: 37),
             child: Column(
               children: [
+                SizedBox(
+                  height: 40.h,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: vm.categories.length,
+                    separatorBuilder: (_, __) => SizedBox(width: 10.w),
+                    itemBuilder: (context, index) {
+                      final category = vm.categories[index];
+                      final isActive = category.id == vm.catId;
+
+                      return GestureDetector(
+                        onTap: () {
+                          vm.changeCategory(category.id);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(18),
+                            color: isActive ? AppColors.redPinkMain : Colors.transparent,
+                          ),
+                          child: Center(
+                            child: Text(
+                              category.title,
+                              style: TextStyle(
+                                color: isActive ? Colors.white : AppColors.redPinkMain,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 19.h,),
                 Expanded(
                   child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

@@ -4,7 +4,6 @@ import '../../../data/models/home/cuisine_model.dart';
 import '../../../data/models/home/recipe_model.dart';
 
 class RecipeViewModel extends ChangeNotifier {
-
   RecipeViewModel({required this.catId}) {
     fetchRecipe();
     fetchCategories();
@@ -17,26 +16,29 @@ class RecipeViewModel extends ChangeNotifier {
   bool isCuisinesLoading = true;
   List<CuisineModel> categories = [];
 
+  void changeCategory(int newCatId) {
+    catId = newCatId;
+    fetchRecipe();
+    notifyListeners();
+  }
   Future<void> fetchRecipe() async {
     isRecipesLoading = true;
     notifyListeners();
-
-    var response = await dio.get('/recipes/list');
-
+    final response = await dio.get('/recipes/list');
     if (response.statusCode != 200) {
       error = response.data;
       isRecipesLoading = false;
       notifyListeners();
       return;
     }
-
     recipes = (response.data as List)
         .map((json) => RecipeModel.fromJson(json))
+        .where((r) => r.categoryId == catId)
         .toList();
-
     isRecipesLoading = false;
     notifyListeners();
   }
+
   Future<void> fetchCategories() async {
     isCuisinesLoading = true;
     notifyListeners();
@@ -54,4 +56,3 @@ class RecipeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 }
-

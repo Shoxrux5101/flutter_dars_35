@@ -11,7 +11,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
      super.key,
      required this.title,
    });
-
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -35,26 +34,52 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
         ),
       ),
       actions: [
-        IconButton(
-          color: AppColors.pink,
-          onPressed: (){},
-          padding: EdgeInsets.only(right: 5),
-          icon: SvgPicture.asset('assets/icons/notification.svg',
-            color: AppColors.pink,
-            width: 28,
-            height: 28,
+        Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: GestureDetector(
+            onTap: () {},
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.pink,
+              ),
+              child: Center(
+                child: SvgPicture.asset(
+                  'assets/icons/notification.svg',
+                  color: AppColors.redPinkMain,
+                  width: 20,
+                  height: 20,
+                ),
+              ),
+            ),
           ),
         ),
-        IconButton(
-          onPressed: (){},
-          padding: EdgeInsets.only(right: 37),
-          icon: SvgPicture.asset('assets/icons/search.svg',
-            color: AppColors.pink,
-            width: 28,
-            height: 28,
+        Padding(
+          padding: const EdgeInsets.only(right: 24),
+          child: GestureDetector(
+            onTap: () {},
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.pink,
+              ),
+              child: Center(
+                child: SvgPicture.asset(
+                  'assets/icons/search.svg',
+                  color: AppColors.redPinkMain,
+                  width: 20,
+                  height: 20,
+                ),
+              ),
+            ),
           ),
         ),
       ],
+
     );
   }
 
