@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled3/features/onboarding/pages/home_page_view_model.dart';
-import 'package:untitled3/features/onboarding/pages/recipe_view_model.dart';
+import 'package:untitled3/features/onboarding/managers/recipe_view_model.dart';
+import '../../../core/router/router_name.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 
 class RecipePage extends StatelessWidget {
   const RecipePage({
-    super.key, required this.catId,
+    super.key,
+    required this.catId,
   });
 final int catId;
 
@@ -31,7 +33,7 @@ final int catId;
                   height: 40.h,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    itemCount: vm.categories.length,
+                    itemCount: vm.recipes.length,
                     separatorBuilder: (_, __) => SizedBox(width: 10.w),
                     itemBuilder: (context, index) {
                       final category = vm.categories[index];
@@ -73,100 +75,104 @@ final int catId;
                     ),
                     itemCount: vm.recipes.length,
                     itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {},
-                      child: SizedBox(
-                        width: 168.w,
-                        height: 226.h,
-                        child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 15,
-                                  vertical: 6,
-                                ),
-                                width: 155.w,
-                                height: 80.h,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(14),
-                                    bottomLeft: Radius.circular(14),
+                      onTap: (){
+                        context.push(RouterName.categoryDetailsPage,extra: {
+                          'id' : vm.recipes[index].id,
+                        });
+                      },
+                        child: SizedBox(
+                          width: 168.w,
+                          height: 226.h,
+                          child: Stack(
+                            children: [
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                    vertical: 6,
                                   ),
-                                  color: AppColors.white,
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      vm.recipes[index].title,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w400,
-                                      ),
+                                  width: 155.w,
+                                  height: 80.h,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(14),
+                                      bottomLeft: Radius.circular(14),
                                     ),
-                                    Text(
-                                      maxLines: 2,
-                                      vm.recipes[index].description,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w300,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          spacing: 5.w,
-                                          children: [
-                                            Text(
-                                              '${vm.recipes[index].rating}',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppColors.pink,
-                                              ),
-                                            ),
-                                            SvgPicture.asset('assets/icons/star.svg'),
-                                          ],
+                                    color: AppColors.white,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        vm.recipes[index].title,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
                                         ),
-                                        Row(
-                                          spacing: 5.w,
-                                          children: [
-                                            SvgPicture.asset('assets/icons/clock.svg'),
-                                            Text(
-                                              '${vm.recipes[index].timeRequired} min',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppColors.pink,
-                                              ),
-                                            ),
-                                          ],
+                                      ),
+                                      Text(
+                                        maxLines: 2,
+                                        vm.recipes[index].description,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
                                         ),
-                                      ],
-                                    ),
-                                  ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            spacing: 5.w,
+                                            children: [
+                                              Text(
+                                                '${vm.recipes[index].rating}',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: AppColors.pink,
+                                                ),
+                                              ),
+                                              SvgPicture.asset('assets/icons/star.svg'),
+                                            ],
+                                          ),
+                                          Row(
+                                            spacing: 5.w,
+                                            children: [
+                                              SvgPicture.asset('assets/icons/clock.svg'),
+                                              Text(
+                                                '${vm.recipes[index].timeRequired} min',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: AppColors.pink,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(14),
-                                child: Image.network(
-                                  alignment: Alignment.topCenter,
-                                  fit: BoxFit.cover,
-                                  width: 169.w,
-                                    height: 153.h,
-                                    vm.recipes[index].photo,
-                                ),
-                            ),
-                          ],
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(14),
+                                  child: Image.network(
+                                    alignment: Alignment.topCenter,
+                                    fit: BoxFit.cover,
+                                    width: 169.w,
+                                      height: 153.h,
+                                      vm.recipes[index].photo,
+                                  ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
               ],
             ),
           ),

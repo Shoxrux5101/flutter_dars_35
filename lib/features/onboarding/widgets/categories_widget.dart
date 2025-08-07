@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled3/core/router/router_name.dart';
 import '../../../core/utils/app_colors.dart';
-import '../pages/home_page_view_model.dart';
+import '../managers/home_page_view_model.dart';
 
 class CategoriesWidget extends StatelessWidget {
   const CategoriesWidget({super.key});

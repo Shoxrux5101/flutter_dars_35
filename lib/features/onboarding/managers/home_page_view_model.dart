@@ -1,18 +1,12 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled3/data/models/home/cuisine_model.dart';
 import '../../../core/client.dart';
-import '../../../data/models/home/recipe_model.dart';
 
 class HomePageViewModel extends ChangeNotifier {
-
-
   HomePageViewModel() {
     fetchCategories();
   }
-
   String? error;
-
   bool isCuisinesLoading = true;
   List<CuisineModel> categories = [];
 
