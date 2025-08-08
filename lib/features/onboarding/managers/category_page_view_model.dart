@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:untitled3/data/models/home/cuisine_model.dart';
+import 'package:untitled3/data/models/home/category_model.dart';
 import '../../../core/client.dart';
 
-class HomePageViewModel extends ChangeNotifier {
-  HomePageViewModel() {
+class CategoryPageViewModel extends ChangeNotifier {
+  CategoryPageViewModel() {
     fetchCategories();
   }
   String? error;
   bool isCuisinesLoading = true;
-  List<CuisineModel> categories = [];
+  List<CategoryModel> categories = [];
 
   Future<void> fetchCategories() async {
     isCuisinesLoading = true;
@@ -21,7 +21,7 @@ class HomePageViewModel extends ChangeNotifier {
       notifyListeners();
     }
     categories = (response.data as List)
-        .map((json) => CuisineModel.fromJson(json))
+        .map((json) => CategoryModel.fromJson(json))
         .toList();
     isCuisinesLoading = false;
     notifyListeners();

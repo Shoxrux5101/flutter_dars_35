@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:untitled3/features/onboarding/widgets/categories_widget.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
 import '../../../core/widgets/custom_app_bar.dart';
-import '../managers/home_page_view_model.dart';
+import '../managers/category_page_view_model.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key});
@@ -11,7 +11,7 @@ class CategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => HomePageViewModel(),
+      create: (context) => CategoryPageViewModel(),
       builder: (context, child) => Scaffold(
         backgroundColor: Color(0xFF1C0F0D),
         extendBody: true,

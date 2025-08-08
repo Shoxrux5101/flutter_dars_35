@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/client.dart';
-import '../../../data/models/home/cuisine_model.dart';
+import '../../../data/models/home/category_model.dart';
 import '../../../data/models/home/recipe_model.dart';
 
 class RecipeViewModel extends ChangeNotifier {
@@ -14,7 +14,7 @@ class RecipeViewModel extends ChangeNotifier {
   bool isRecipesLoading = true;
   List<RecipeModel> recipes = [];
   bool isCuisinesLoading = true;
-  List<CuisineModel> categories = [];
+  List<CategoryModel> categories = [];
 
   void changeCategory(int newCatId) {
     catId = newCatId;
@@ -50,7 +50,7 @@ class RecipeViewModel extends ChangeNotifier {
       notifyListeners();
     }
     categories = (response.data as List)
-        .map((json) => CuisineModel.fromJson(json))
+        .map((json) => CategoryModel.fromJson(json))
         .toList();
     isCuisinesLoading = false;
     notifyListeners();

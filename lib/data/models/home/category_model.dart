@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class CuisineModel {
+class CategoryModel {
   final String image;
   final String title;
   final int id;
 
-  CuisineModel({
+  CategoryModel({
     required this.image,
     required this.title,
     required this.id,
   });
 
-  factory CuisineModel.fromJson(Map<String, dynamic> json) {
-    return CuisineModel(
+  factory CategoryModel.fromJson(Map<String, dynamic> json) {
+    return CategoryModel(
       image: json['image'],
       title: json['title'],
       id: json['id'],

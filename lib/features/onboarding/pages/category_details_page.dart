@@ -14,9 +14,9 @@ class CategoryDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => CategoryDetailsViewModel(recipeId: recipeId),
+      create: (context) => CategoryDetailsViewModel(recipeId: recipeId),
       child: Consumer<CategoryDetailsViewModel>(
-        builder: (context, vm, _) {
+        builder: (context, vm, child) {
           if (vm.isCategoryDetailsLoading) {
             return const Scaffold(
               body: Center(child: CircularProgressIndicator()),

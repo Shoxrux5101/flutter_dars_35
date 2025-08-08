@@ -4,14 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled3/core/router/router_name.dart';
 import '../../../core/utils/app_colors.dart';
-import '../managers/home_page_view_model.dart';
+import '../managers/category_page_view_model.dart';
 
 class CategoriesWidget extends StatelessWidget {
   const CategoriesWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomePageViewModel>(
+    return Consumer<CategoryPageViewModel>(
       builder: (context, vm, child) => Column(
         children: [
           Expanded(

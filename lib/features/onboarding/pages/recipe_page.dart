@@ -38,7 +38,6 @@ final int catId;
                     itemBuilder: (context, index) {
                       final category = vm.categories[index];
                       final isActive = category.id == vm.catId;
-
                       return GestureDetector(
                         onTap: () {
                           vm.changeCategory(category.id);
