@@ -1,14 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:untitled3/core/router/router_name.dart';
-import 'package:untitled3/features/onboarding/pages/category_details_page.dart';
-import 'package:untitled3/features/onboarding/pages/category_page.dart';
+import 'package:untitled3/features/categories/pages/category_details_page.dart';
+import 'package:untitled3/features/categories/pages/category_page.dart';
 import 'package:untitled3/features/onboarding/pages/onboarding_page.dart';
-import 'package:untitled3/features/onboarding/pages/recipe_page.dart';
+import '../../features/recipes/pages/recipe_page.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: RouterName.onboardingPage,
+    initialLocation: RouterName.categoryPage,
     routes: [
       GoRoute(
         path: RouterName.onboardingPage,

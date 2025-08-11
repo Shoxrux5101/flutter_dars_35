@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled3/core/utils/app_colors.dart';
 import 'package:untitled3/core/widgets/custom_app_bar.dart';
-import 'package:untitled3/features/onboarding/managers/categopry_details_view_model.dart';
+import 'package:untitled3/features/categories/managers/categopry_details_view_model.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
 
 class CategoryDetailsPage extends StatelessWidget {

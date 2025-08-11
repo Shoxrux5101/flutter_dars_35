@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled3/features/onboarding/widgets/categories_widget.dart';
+import 'package:untitled3/features/categories/widgets/categories_widget.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 import '../managers/category_page_view_model.dart';

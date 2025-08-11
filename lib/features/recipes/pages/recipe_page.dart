@@ -3,11 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled3/features/onboarding/managers/recipe_view_model.dart';
+
 import '../../../core/router/router_name.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
 import '../../../core/widgets/custom_app_bar.dart';
+import '../managers/recipe_view_model.dart';
+
 
 class RecipePage extends StatelessWidget {
   const RecipePage({
