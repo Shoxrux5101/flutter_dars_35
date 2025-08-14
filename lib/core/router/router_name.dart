@@ -5,4 +5,7 @@ class RouterName {
   static String categoryPage="/categories";
   static String recipePage="/recipe";
   static String categoryDetailsPage="/categoryDetails";
+  static String forgotPasswordPage="/forgotPassword";
+  static String otpCoce="/otpCode";
+  static String loginPage = '/login';
 }
