@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled3/data/models/home/category_model.dart';
+import 'package:untitled3/data/models/category_model.dart';
 import '../../../core/client.dart';
 
 class CategoryPageViewModel extends ChangeNotifier {

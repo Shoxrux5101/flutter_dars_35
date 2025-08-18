@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:untitled3/core/router/router_name.dart';
 import 'package:untitled3/features/categories/pages/category_details_page.dart';
@@ -6,10 +7,11 @@ import 'package:untitled3/features/forgot_password/page/forgot_password.dart';
 import 'package:untitled3/features/onboarding/pages/onboarding_page.dart';
 import '../../features/login_register/page/login.dart';
 import '../../features/recipes/pages/recipe_page.dart';
+import '../../features/trending_recipe/pages/trending_recipes.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: RouterName.loginPage,
+    initialLocation: RouterName.trendingPage,
     routes: [
       GoRoute(
         path: RouterName.onboardingPage,
@@ -30,17 +32,23 @@ class AppRouter {
       GoRoute(
         path: RouterName.recipePage,
         builder: (context, state) {
-          final extra = state.extra as Map<String, dynamic>;
-          final id = extra['id'];
-          return RecipePage(catId:id);
+          final id = state.extra;
+          if (id == null || id is! int) {
+            return const Scaffold(
+              body: Center(child: Text("Category id not provided")),
+            );
+          }
+          return RecipePage(catId: id);
         },
       ),
+
+
       GoRoute(
         path: RouterName.categoryDetailsPage,
         builder: (context, state) {
           final extra = state.extra as Map<String, dynamic>;
           final id = extra['id'];
-          return CategoryDetailsPage(recipeId:id);
+          return CategoryDetailsPage(recipeId: id);
         },
       ),
       GoRoute(
@@ -55,10 +63,19 @@ class AppRouter {
         //   }),
         // ]
       ),
-      GoRoute(path: RouterName.loginPage,
+      GoRoute(
+        path: RouterName.loginPage,
         builder: (context, state) {
-        return Login();
-        }
+          return Login();
+        },
+      ),
+      GoRoute(
+        path: RouterName.trendingPage,
+        builder: (context, state) {
+          final extra = state.extra as Map<String,dynamic>?;
+          final id = extra?['id'] ?? 0;
+          return TrendingRecipes();
+        },
       ),
     ],
   );

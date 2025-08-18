@@ -8,6 +8,7 @@ class RecipeModel {
   final String photo;
   final int timeRequired;
   final num rating;
+  final String difficulty;
 
   RecipeModel({
     required this.id,
@@ -17,6 +18,7 @@ class RecipeModel {
     required this.photo,
     required this.timeRequired,
     required this.rating,
+    required this.difficulty,
   });
 
   factory RecipeModel.fromJson(Map<String, dynamic>json){
@@ -27,6 +29,7 @@ class RecipeModel {
       photo: json['photo'],
       timeRequired: json['timeRequired'],
       rating: json['rating'],
+      difficulty: json['difficulty'],
     );
   }
 }

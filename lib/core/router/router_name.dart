@@ -8,4 +8,5 @@ class RouterName {
   static String forgotPasswordPage="/forgotPassword";
   static String otpCoce="/otpCode";
   static String loginPage = '/login';
+  static String trendingPage = '/trending';
 }

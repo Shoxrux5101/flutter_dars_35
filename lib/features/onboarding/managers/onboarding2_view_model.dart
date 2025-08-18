@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/client.dart';
-import '../../../data/models/home/onboarding2_model.dart';
+import '../../../data/models/onboarding2_model.dart';
 
 class Onboarding2ViewModel extends ChangeNotifier {
   Onboarding2ViewModel() {
