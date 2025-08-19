@@ -7,6 +7,7 @@ import 'package:untitled3/features/forgot_password/page/forgot_password.dart';
 import 'package:untitled3/features/onboarding/pages/onboarding_page.dart';
 import '../../features/login_register/page/login.dart';
 import '../../features/recipes/pages/recipe_page.dart';
+import '../../features/top_chefs/pages/top_chefs.dart';
 import '../../features/trending_recipe/pages/trending_recipes.dart';
 
 class AppRouter {
@@ -75,6 +76,14 @@ class AppRouter {
           final extra = state.extra as Map<String,dynamic>?;
           final id = extra?['id'] ?? 0;
           return TrendingRecipes();
+        },
+      ),
+      GoRoute(
+        path: RouterName.chefsPage,
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          final id = extra?['id'] ?? 0;
+          return TopChefs(id: id,);
         },
       ),
     ],

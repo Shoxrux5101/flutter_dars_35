@@ -33,7 +33,6 @@ class TrendingRecipesViewModel extends ChangeNotifier {
         _recipes = data;
       },
     );
-
     _isLoading = false;
     notifyListeners();
   }

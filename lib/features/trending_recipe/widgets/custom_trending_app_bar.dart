@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../utils/app_colors.dart';
+import '../../../core/utils/app_colors.dart';
 
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
+class CustomTrendingAppBar extends StatelessWidget implements PreferredSizeWidget{
 
   final String title;
 
-   const CustomAppBar({
-     super.key,
-     required this.title,
+  CustomTrendingAppBar({
+    super.key,
+    required this.title,
 
-   });
+  });
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -38,18 +38,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
         Padding(
           padding: EdgeInsets.only(right: 12),
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+
+            },
             child: Container(
               width: 40,
               height: 40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.pink,
+                color: AppColors.redPinkMain,
               ),
               child: Center(
                 child: SvgPicture.asset(
-                  'assets/icons/notification.svg',
-                  color: AppColors.redPinkMain,
+                  'assets/icons/like1.svg',
+                  color: AppColors.white,
                   width: 20,
                   height: 20,
                 ),
@@ -66,12 +68,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
               height: 40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.pink,
+                color: AppColors.redPinkMain,
               ),
               child: Center(
                 child: SvgPicture.asset(
-                  'assets/icons/search.svg',
-                  color: AppColors.redPinkMain,
+                  'assets/icons/share.svg',
+                  color: AppColors.white,
                   width: 20,
                   height: 20,
                 ),

@@ -33,10 +33,10 @@ class TrendingRecipes extends StatelessWidget {
               builder: (context, child) => Consumer<TrendingRecipesViewModel>(
                 builder: (context, vm, child) {
                   if (vm.isLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return Center(child: CircularProgressIndicator());
                   }
                   if (vm.recipes == null) {
-                    return const Center(
+                    return Center(
                       child: Text(
                         'Trending malumotlar topilmadi',
                         style: TextStyle(color: Colors.black, fontSize: 16),
@@ -83,15 +83,18 @@ class TrendingRecipes extends StatelessWidget {
                       ),
                     );
                   }
-                  final recipes = vm.recipes;
-                  return GestureDetector(
-                    onTap: (){
-                      Navigator.push(context,
-                      MaterialPageRoute(builder: (context)=>TrendingRecipesDetails(),
-                      )
+                  return RecipeList(
+                    vm: vm,
+                    onRecipeTap: (int recipeId) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TrendingRecipesDetails(
+                            recipeId: recipeId,
+                          ),
+                        ),
                       );
                     },
-                      child: RecipeList(vm: vm)
                   );
                 },
               ),

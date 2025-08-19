@@ -18,7 +18,7 @@ class CategoryDetailsPage extends StatelessWidget {
       child: Consumer<CategoryDetailsViewModel>(
         builder: (context, vm, child) {
           if (vm.isCategoryDetailsLoading) {
-            return const Scaffold(
+            return Scaffold(
               body: Center(child: CircularProgressIndicator()),
             );
           }
@@ -36,28 +36,28 @@ class CategoryDetailsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 50.h),
-                  _buildHeaderCard(detail),
+                  buildHeaderCard(detail),
                   SizedBox(height: 26.h),
-                  _buildUserInfo(detail),
+                  buildUserInfo(detail),
                   SizedBox(height: 20.h),
-                  const Divider(color: Colors.white),
+                  Divider(color: Colors.white),
                   SizedBox(height: 31.h),
-                  _buildDetails(detail),
+                  buildDetails(detail),
                   SizedBox(height: 31.h),
-                  _buildIngredients(detail),
+                  buildIngredients(detail),
                   SizedBox(height: 31.h),
-                  _buildInstructions(detail),
+                  buildInstructions(detail),
                 ],
               ),
             ),
-            bottomNavigationBar: const BottomNavigation(),
+            bottomNavigationBar: BottomNavigation(),
           );
         },
       ),
     );
   }
 
-  Widget _buildHeaderCard(detail) {
+  Widget buildHeaderCard(detail) {
     return Container(
       height: 337.h,
       decoration: BoxDecoration(
@@ -112,8 +112,7 @@ class CategoryDetailsPage extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildUserInfo(detail) {
+  Widget buildUserInfo(detail) {
     return Row(
       children: [
         CircleAvatar(
@@ -124,31 +123,31 @@ class CategoryDetailsPage extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(detail.user.username, style: const TextStyle(fontSize: 12, color: Colors.white)),
-            Text(detail.user.firstName, style: const TextStyle(fontSize: 12, color: Colors.white)),
+            Text(detail.user.username, style: TextStyle(fontSize: 12, color: Colors.white)),
+            Text(detail.user.firstName, style: TextStyle(fontSize: 12, color: Colors.white)),
           ],
         ),
-        const Spacer(),
+        Spacer(),
         Container(
           width: 109,
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             color: AppColors.pink,
           ),
-          child: const Text(
+          child: Text(
             'Following',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 12, color: Colors.red),
           ),
         ),
         SizedBox(width: 9.w),
-        const Icon(Icons.more_vert, color: Colors.white),
+        Icon(Icons.more_vert, color: Colors.white),
       ],
     );
   }
 
-  Widget _buildDetails(detail) {
+  Widget buildDetails(detail) {
     return Row(
       children: [
          Text(
@@ -171,7 +170,7 @@ class CategoryDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildIngredients(detail) {
+  Widget buildIngredients(detail) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -191,11 +190,11 @@ class CategoryDetailsPage extends StatelessWidget {
       ],
     );
   }
-  Widget _buildInstructions(detail) {
+  Widget buildInstructions(detail) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         Text(
+        Text(
           '6 Easy Step',
           style: TextStyle(
             fontSize: 20,
@@ -204,19 +203,20 @@ class CategoryDetailsPage extends StatelessWidget {
           ),
         ),
         SizedBox(height: 11.h),
-        ...detail.instructions.asMap().entries.map((entry) {
-          final index = entry.key;
-          final instruction = entry.value;
-          return Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            padding: const EdgeInsets.all(12),
+
+        for (int i = 0; i < detail.instructions.length; i++)
+          Container(
+            margin: EdgeInsets.only(bottom: 8),
+            padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: index.isEven ? AppColors.pinkSub : AppColors.pink,
+              color: i % 2 == 0 ? AppColors.pinkSub : AppColors.pink,
               borderRadius: BorderRadius.circular(14),
             ),
-            child: Text("${instruction.order}. ${instruction.text}"),
-          );
-        }).toList(),
+            child: Text(
+              "${detail.instructions[i].order}. ${detail.instructions[i].text}",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
       ],
     );
   }
