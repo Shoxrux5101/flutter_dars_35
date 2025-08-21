@@ -12,6 +12,23 @@ class TopChefsProfileViewModel extends ChangeNotifier {
   bool isLoading = false;
   String? errorMessage;
 
+  // bool isMutedNotification = false;
+  // bool isMuteAccount = false;
+  // bool isBlockAccount = false;
+  //
+  // void toggleMuteNotification(bool value) {
+  //   isMutedNotification = value;
+  //   notifyListeners();
+  // }
+  // void toggleMuteAccount(bool value) {
+  //   isMuteAccount = value;
+  //   notifyListeners();
+  // }
+  // void toggleBlockAccount(bool value) {
+  //   isBlockAccount = value;
+  //   notifyListeners();
+  // }
+
   Future<void> fetchChefsRecipes(int chefId) async {
     isLoading = true;
     errorMessage = null;
