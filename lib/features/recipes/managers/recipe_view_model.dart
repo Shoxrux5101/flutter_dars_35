@@ -15,68 +15,63 @@ class RecipeViewModel extends ChangeNotifier {
     required this.catId,
   })  : _recipesRepository = recipesRepository,
         _categoryRepository = categoryRepository {
-    _selectedCategoryId = catId;
+    selectedCategoryId = catId;
     fetchCategories();
     fetchRecipes();
   }
 
-  bool _isLoading = false;
-  String? _errorMessage;
-  List<RecipeModel> _recipes = [];
-  List<CategoryModel> _categories = [];
-  int _selectedCategoryId = 0;
+  bool isLoading = false;
+  String? errorMessage;
+  List<RecipeModel> recipes = [];
+  List<CategoryModel> categories = [];
+  int selectedCategoryId = 0;
   final List<int> likedItems = [];
 
-  bool get isLoading => _isLoading;
-  String? get errorMessage => _errorMessage;
-  List<RecipeModel> get recipes => _recipes;
-  List<CategoryModel> get categories => _categories;
-  int get selectedCategoryId => _selectedCategoryId;
 
   Future<void> fetchRecipes() async {
-    _isLoading = true;
-    _errorMessage = null;
-    _recipes = [];
+    isLoading = true;
+    errorMessage = null;
+    recipes = [];
     notifyListeners();
 
     final result = await _recipesRepository.getRecipe();
     result.fold(
           (error) {
-        _errorMessage = error.toString();
+        errorMessage = error.toString();
       },
           (data) {
-        if (_selectedCategoryId != 0) {
-          _recipes = data.where((r) => r.categoryId == _selectedCategoryId).toList();
+        if (selectedCategoryId != 0) {
+          recipes = data.where((r) => r.categoryId == selectedCategoryId).toList();
         } else {
-          _recipes = data;
+          recipes = data;
         }
       },
     );
-    _isLoading = false;
+    isLoading = false;
     notifyListeners();
   }
 
   Future<void> fetchCategories() async {
-    _isLoading = true;
-    _errorMessage = null;
-    _categories = [];
+    isLoading = true;
+    errorMessage = null;
+    categories = [];
     notifyListeners();
 
     final result = await _categoryRepository.getCategories();
     result.fold(
           (error) {
-        _errorMessage = error.toString();
+        errorMessage = error.toString();
       },
           (data) {
-        _categories = data;
+        categories = data;
       },
     );
-    _isLoading = false;
+    isLoading = false;
     notifyListeners();
   }
 
   void changeCategory(int categoryId) {
-    _selectedCategoryId = categoryId;
+    selectedCategoryId = categoryId;
     fetchRecipes();
     notifyListeners();
   }

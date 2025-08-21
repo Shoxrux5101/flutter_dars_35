@@ -4,9 +4,8 @@ import 'package:untitled3/data/repository/chefs/repository/chefs_repository.dart
 
 class TopChefsViewModel extends ChangeNotifier {
   final ChefsRepository _repository;
-  final int id;
 
-  TopChefsViewModel({required ChefsRepository repository, required this.id})
+  TopChefsViewModel({required ChefsRepository repository})
       : _repository = repository;
 
   bool isLoading = false;
@@ -16,19 +15,57 @@ class TopChefsViewModel extends ChangeNotifier {
   List<ChefsModel> mostLikeChefs = [];
   List<ChefsModel> newChefs = [];
 
-  Future<void> fetchTopChefs() async {
+  Future<void> fetchTopViewedChefs(List<int> ids) async {
     isLoading = true;
     errorMessage = null;
     notifyListeners();
 
-    final result = await _repository.getChef(id);
+    final result = await _repository.getChefs(ids);
 
     result.fold(
           (error) {
         errorMessage = error.toString();
       },
-          (chef) {
-        topChefs = [chef];
+          (chefs) {
+        topChefs = chefs;
+      },
+    );
+
+    isLoading = false;
+    notifyListeners();
+  }
+  Future<void> fetchTopLikedChefs(List<int> ids) async {
+    isLoading = true;
+    errorMessage = null;
+    notifyListeners();
+
+    final result = await _repository.getChefs(ids);
+
+    result.fold(
+          (error) {
+        errorMessage = error.toString();
+      },
+          (chefs) {
+            mostLikeChefs = chefs;
+      },
+    );
+
+    isLoading = false;
+    notifyListeners();
+  }
+  Future<void> fetchNewChefs(List<int> ids) async {
+    isLoading = true;
+    errorMessage = null;
+    notifyListeners();
+
+    final result = await _repository.getChefs(ids);
+
+    result.fold(
+          (error) {
+        errorMessage = error.toString();
+      },
+          (chefs) {
+        newChefs = chefs;
       },
     );
 
@@ -36,3 +73,4 @@ class TopChefsViewModel extends ChangeNotifier {
     notifyListeners();
   }
 }
+

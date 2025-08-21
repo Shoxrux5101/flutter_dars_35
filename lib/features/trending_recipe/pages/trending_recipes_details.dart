@@ -160,7 +160,7 @@ class TrendingRecipesDetails extends StatelessWidget {
           ],
         ),
         Spacer(),
-        FollowButton(),
+        FollowButton(width: 109.w,height: 21.h, textSize: 12,),
         SizedBox(width: 9.w),
         Icon(Icons.more_vert, color: AppColors.redPinkMain),
       ],

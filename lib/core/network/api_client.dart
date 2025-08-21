@@ -1,13 +1,28 @@
 import 'package:dio/dio.dart';
+import 'package:untitled3/core/authInterceptor.dart';
 import '../utils/result.dart';
 
 class ApiClient {
-  final _dio = Dio(
+  ApiClient({required this.interceptor}){
+  _dio = Dio(
     BaseOptions(
       baseUrl: "https://7a3c890bf239.ngrok-free.app/api/v1",
       validateStatus: (status) => true,
     ),
+  )..interceptors.add(
+    interceptor, // LogInterceptor(
+    //   request: true,
+    //   requestHeader: true,
+    //   requestBody: true,
+    //   responseHeader: true,
+    //   responseBody: true,
+    //   error: true,
+    //   logPrint: (obj) => print(obj),
   );
+  }
+  final AuthInterceptor interceptor;
+
+  late final Dio _dio;
 
   Future<Result<T>> get<T>(String path, {Map<String, dynamic>? queryParams}) async {
     try {

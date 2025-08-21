@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled3/core/widgets/custom_app_bar.dart';
 import 'package:untitled3/features/trending_recipe/managers/trending_recipes_view_model.dart';
 import 'package:untitled3/features/trending_recipe/pages/trending_recipes_details.dart';
 import 'package:untitled3/features/trending_recipe/widgets/most_view_today.dart';
+import '../../../core/authInterceptor.dart';
 import '../../../core/network/api_client.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
 import '../../../data/repository/categories/repository/category_repository.dart';
@@ -25,7 +27,9 @@ class TrendingRecipes extends StatelessWidget {
             child: ChangeNotifierProvider(
               create: (context) {
                 final vm = TrendingRecipesViewModel(
-                  repository: TrendingRecipesRepository(dioClient: ApiClient()),
+                  repository: TrendingRecipesRepository(dioClient: ApiClient(interceptor: AuthInterceptor(
+                    secureStorage: const FlutterSecureStorage(),
+                  ),)),
                 );
                 vm.fetchTrendingRecipes();
                 return vm;
@@ -56,14 +60,14 @@ class TrendingRecipes extends StatelessWidget {
               ),
             ),
           ),
-
           Expanded(
             child: ChangeNotifierProvider(
               create: (context) {
-                final apiClient = ApiClient();
+                final apiClient = ApiClient(interceptor: AuthInterceptor(
+                    secureStorage: const FlutterSecureStorage(),
+                ),);
                 final recipesRepository = RecipesRepository(dioClient: apiClient);
                 final categoryRepository = CategoryRepository(dioClient: apiClient);
-
                 return RecipeViewModel(
                   recipesRepository: recipesRepository,
                   categoryRepository: categoryRepository,

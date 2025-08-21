@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../core/utils/app_colors.dart';
 
 class FollowButton extends StatefulWidget {
-  const FollowButton({super.key});
+  final double width;
+  final double height;
+  final double textSize;
+  const FollowButton({super.key, required this.width, required this.height, required this.textSize});
 
   @override
   State<FollowButton> createState() => FollowButtonState();
@@ -21,18 +24,20 @@ class FollowButtonState extends State<FollowButton> {
         });
       },
       child: Container(
-        width: 109,
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        width: widget.width,
+        height: widget.height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: isFollowing ? AppColors.redPinkMain : AppColors.pink,
         ),
-        child: Text(
-          'Following',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 12,
-            color: isFollowing ? Colors.white : Colors.red,
+        child: Center(
+          child: Text(
+            'Following',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: widget.textSize,
+              color: isFollowing ? Colors.white : Colors.red,
+            ),
           ),
         ),
       ),

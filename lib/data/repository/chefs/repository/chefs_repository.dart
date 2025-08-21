@@ -7,16 +7,87 @@ class ChefsRepository {
 
   ChefsRepository({required ApiClient dioClient}) : _dioClient = dioClient;
 
-  Future<Result<ChefsModel>> getChef(int id) async {
+  Future<Result<List<ChefsModel>>> getChefs(List<int> ids) async {
     try {
-      final result = await _dioClient.get('/auth/details/$id');
-      return result.fold(
-            (error) => Result.error(error),
-            (data) => Result.ok(ChefsModel.fromJson(data)),
-      );
-    } on Exception catch (e) {
-      return Result.error(e);
-    } catch (e) {
+      final List<ChefsModel> chefs = [];
+
+      for (final id in ids) {
+        final result = await _dioClient.get('/auth/details/$id');
+
+        result.fold(
+              (error) {
+            print("Chef $id yuklab bo‘lmadi: $error");
+          },
+              (data) {
+            if (data is Map<String, dynamic>) {
+              chefs.add(ChefsModel.fromJson(data));
+            } else {
+              print("Backend noto‘g‘ri format qaytardi: $data");
+            }
+          },
+        );
+      }
+
+      return Result.ok(chefs);
+    } catch (e, s) {
+      print("Exception: $e");
+      print(s);
+      return Result.error(Exception(e.toString()));
+    }
+  }
+  Future<Result<List<ChefsModel>>> getLikedChefs(List<int> ids) async {
+    try {
+      final List<ChefsModel> chefs = [];
+
+      for (final id in ids) {
+        final result = await _dioClient.get('/auth/details/$id');
+
+        result.fold(
+              (error) {
+            print("Chef $id yuklab bo‘lmadi: $error");
+          },
+              (data) {
+            if (data is Map<String, dynamic>) {
+              chefs.add(ChefsModel.fromJson(data));
+            } else {
+              print("Backend noto‘g‘ri format qaytardi: $data");
+            }
+          },
+        );
+      }
+
+      return Result.ok(chefs);
+    } catch (e, s) {
+      print("Exception: $e");
+      print(s);
+      return Result.error(Exception(e.toString()));
+    }
+  }
+  Future<Result<List<ChefsModel>>> getNewChefs(List<int> ids) async {
+    try {
+      final List<ChefsModel> chefs = [];
+
+      for (final id in ids) {
+        final result = await _dioClient.get('/auth/details/$id');
+
+        result.fold(
+              (error) {
+            print("Chef $id yuklab bo‘lmadi: $error");
+          },
+              (data) {
+            if (data is Map<String, dynamic>) {
+              chefs.add(ChefsModel.fromJson(data));
+            } else {
+              print("Backend noto‘g‘ri format qaytardi: $data");
+            }
+          },
+        );
+      }
+
+      return Result.ok(chefs);
+    } catch (e, s) {
+      print("Exception: $e");
+      print(s);
       return Result.error(Exception(e.toString()));
     }
   }

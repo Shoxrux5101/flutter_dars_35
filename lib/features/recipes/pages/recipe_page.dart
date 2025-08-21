@@ -29,7 +29,7 @@ class RecipePage extends StatelessWidget {
       builder: (context, child) => Consumer<RecipeViewModel>(
         builder: (context, vm, child) {
           if (vm.isLoading) {
-            return const Scaffold(
+            return Scaffold(
               body: Center(child: CircularProgressIndicator()),
             );
           }

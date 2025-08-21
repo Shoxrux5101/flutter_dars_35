@@ -31,7 +31,7 @@ class ChefsModel {
       presentation: json['presentation'],
       profilePhoto: json['profilePhoto'],
       recipesCount: json['recipesCount'],
-      userName: json['userName'],
+      userName: json['username'],
     );
   }
 }

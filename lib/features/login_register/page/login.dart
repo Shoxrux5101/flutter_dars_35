@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:untitled3/core/network/api_client.dart';
 import 'package:untitled3/features/login_register/page/sign_up.dart';
 import 'package:untitled3/features/login_register/widgets/email_input_field.dart';
 import 'package:untitled3/features/login_register/widgets/password_input_field.dart';
+import '../../../core/authInterceptor.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../data/repository/authentication/repository/authentication_repository.dart';
 
@@ -17,7 +19,9 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final authRepo = AuthenticationRepository(dioClient: ApiClient());
+  final authRepo = AuthenticationRepository(dioClient: ApiClient(interceptor: AuthInterceptor(
+    secureStorage: const FlutterSecureStorage(),
+  ),));
 
   @override
   Widget build(BuildContext context) {

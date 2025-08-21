@@ -8,32 +8,28 @@ class TrendingRecipesViewModel extends ChangeNotifier {
   TrendingRecipesViewModel({required TrendingRecipesRepository repository})
       : _repository = repository;
 
-  bool _isLoading = false;
-  String? _errorMessage;
-  TrendingRecipesModel? _recipes;
-
-  bool get isLoading => _isLoading;
-  String? get errorMessage => _errorMessage;
-  TrendingRecipesModel? get recipes => _recipes;
+  bool isLoading = false;
+  String? errorMessage;
+  TrendingRecipesModel? recipes;
 
   final Set<int> likedItems = {};
 
   Future<void> fetchTrendingRecipes() async {
-    _isLoading = true;
-    _errorMessage = null;
-    _recipes = null;
+    isLoading = true;
+    errorMessage = null;
+    recipes = null;
     notifyListeners();
 
     final result = await _repository.getTrendingRecipe();
     result.fold(
           (error) {
-        _errorMessage = error.toString();
+        errorMessage = error.toString();
       },
           (data) {
-        _recipes = data;
+        recipes = data;
       },
     );
-    _isLoading = false;
+    isLoading = false;
     notifyListeners();
   }
   void toggleLike(int id) {

@@ -56,7 +56,6 @@ class CategoryDetailsPage extends StatelessWidget {
       ),
     );
   }
-
   Widget buildHeaderCard(detail) {
     return Container(
       height: 337.h,
