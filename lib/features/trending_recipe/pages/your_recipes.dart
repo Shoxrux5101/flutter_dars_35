@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:untitled3/core/widgets/custom_app_bar.dart';
 import 'package:untitled3/features/trending_recipe/managers/trending_recipes_view_model.dart';
 import 'package:untitled3/features/trending_recipe/pages/trending_recipes_details.dart';
-import 'package:untitled3/features/trending_recipe/widgets/most_view_today.dart';
+import 'package:untitled3/features/trending_recipe/widgets/your_most_view_today.dart';
 import '../../../core/authInterceptor.dart';
 import '../../../core/network/api_client.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
@@ -13,14 +13,16 @@ import '../../../data/repository/recipes/repository/recipe_repository.dart';
 import '../../../data/repository/trending_recipes/repository/trending_recipes_repository.dart';
 import '../../recipes/managers/recipe_view_model.dart';
 import '../widgets/recipe_list.dart';
+import '../widgets/your_recipe_list.dart';
 
-class TrendingRecipes extends StatelessWidget {
-  const TrendingRecipes({super.key});
+class YourRecipes extends StatelessWidget {
+  const YourRecipes({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Trending Recipes'),
+      extendBody: true,
+      appBar: CustomAppBar(title: 'Your Recipes'),
       body: Column(
         children: [
           Expanded(
@@ -50,7 +52,7 @@ class TrendingRecipes extends StatelessWidget {
                   final recipe = vm.recipes!;
                   return Column(
                     children: [
-                      MostViewToday(
+                      YourMostViewToday(
                         vm: vm,
                         recipe: recipe,
                       ),
@@ -64,41 +66,41 @@ class TrendingRecipes extends StatelessWidget {
             child: ChangeNotifierProvider(
               create: (context) {
                 final apiClient = ApiClient(interceptor: AuthInterceptor(
-                    secureStorage: const FlutterSecureStorage(),
+                  secureStorage: FlutterSecureStorage(),
                 ),);
                 final recipesRepository = RecipesRepository(dioClient: apiClient);
                 final categoryRepository = CategoryRepository(dioClient: apiClient);
                 return RecipeViewModel(
                   recipesRepository: recipesRepository,
                   categoryRepository: categoryRepository,
-                  catId: 1,
+                  catId: 5,
                 );
               },
               builder: (context, child) => Consumer<RecipeViewModel>(
                 builder: (context, vm, child) {
                   if (vm.isLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return  Center(child: CircularProgressIndicator());
                   }
                   if (vm.recipes.isEmpty) {
-                    return const Center(
+                    return Center(
                       child: Text(
                         'Recipes topilmadi',
                         style: TextStyle(color: Colors.black, fontSize: 16),
                       ),
                     );
                   }
-                  return RecipeList(
-                    vm: vm,
-                    onRecipeTap: (int recipeId) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TrendingRecipesDetails(
-                            recipeId: recipeId,
+                  return YourRecipeList(
+                      vm: vm,
+                      onRecipeTap: (int recipeId) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TrendingRecipesDetails(
+                              recipeId: recipeId,
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
                   );
                 },
               ),

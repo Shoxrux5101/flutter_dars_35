@@ -1,5 +1,4 @@
-import 'package:untitled3/core/network/api_client.dart';
-
+import '../../../../core/network/api_client.dart';
 import '../../../../core/utils/result.dart';
 import '../../../models/reviews_model.dart';
 
@@ -8,17 +7,21 @@ class ReviewsRepository {
 
   ReviewsRepository({required ApiClient dioClient}) : _dioClient = dioClient;
 
-  Future<Result<ReviewsModel>> getReviews(int id) async {
+  Future<Result<ReviewsModel>> getRecipeReviews(int recipeId) async {
     try {
-      final result = await _dioClient.get('/recipes/reviews/details/$id');
+      final result = await _dioClient.get('/recipes/reviews/detail/$recipeId');
 
       return result.fold(
             (error) => Result.error(error),
-            (data) => Result.ok(ReviewsModel.fromJson(data)),
+            (data) {
+          final recipe = ReviewsModel.fromJson(data);
+          return Result.ok(recipe);
+        },
       );
+    } on Exception catch (e) {
+      return Result.error(e);
     } catch (e) {
       return Result.error(Exception(e.toString()));
     }
   }
 }
-

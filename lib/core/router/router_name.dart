@@ -8,6 +8,8 @@ class RouterName {
   static String otpCoce="/otpCode";
   static String loginPage = '/login';
   static String trendingPage = '/trending';
+  static String yourRecipePage = '/yourTrending';
   static String chefsPage = '/chefs';
   static String reviewsPage = '/reviews';
+  static String communityPage = '/community';
 }

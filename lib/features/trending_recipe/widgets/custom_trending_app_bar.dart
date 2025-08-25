@@ -7,7 +7,7 @@ class CustomTrendingAppBar extends StatelessWidget implements PreferredSizeWidge
 
   final String title;
 
-  CustomTrendingAppBar({
+  const CustomTrendingAppBar({
     super.key,
     required this.title,
 

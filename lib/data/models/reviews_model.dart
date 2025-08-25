@@ -1,4 +1,3 @@
-import 'category_details_model.dart';
 
 class User {
   final int id;
@@ -16,11 +15,11 @@ class User {
   });
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['id'],
-      profilePhoto: json['profilePhoto'],
-      username: json['username'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
+      id: json['id'] ?? 0,
+      profilePhoto: json['profilePhoto'] ?? '',
+      username: json['username'] ?? '',
+      firstName: json['firstName'] ?? '',
+      lastName: json['lastName'] ?? '',
     );
   }
 }
@@ -29,9 +28,9 @@ class ReviewsModel {
   final int id;
   final String title;
   final String photo;
-  final double rating;
+  final int rating;
   final int reviewsCount;
-  final UserModel user;
+  final User user;
 
   ReviewsModel({
     required this.id,
@@ -43,12 +42,12 @@ class ReviewsModel {
   });
   factory ReviewsModel.fromJson(Map<String, dynamic> json) {
     return ReviewsModel(
-      id: json['id'],
-      title: json['title'],
-      photo: json['photo'],
-      rating: json['rating'],
-      reviewsCount: json['reviewsCount'],
-      user: UserModel.fromJson(json['user']),
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
+      photo: json['photo'] ?? '',
+      rating: json['rating'] ?? 0,
+      reviewsCount: json['reviewsCount'] ?? 0,
+      user: User.fromJson(json['user'] ?? {}),
     );
   }
 }

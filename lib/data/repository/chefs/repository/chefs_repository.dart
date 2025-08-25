@@ -55,7 +55,6 @@ class ChefsRepository {
           },
         );
       }
-
       return Result.ok(chefs);
     } catch (e, s) {
       print("Exception: $e");

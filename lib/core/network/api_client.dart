@@ -10,7 +10,8 @@ class ApiClient {
       validateStatus: (status) => true,
     ),
   )..interceptors.add(
-    interceptor, // LogInterceptor(
+    interceptor,
+    // LogInterceptor(
     //   request: true,
     //   requestHeader: true,
     //   requestBody: true,
