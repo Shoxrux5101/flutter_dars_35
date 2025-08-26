@@ -37,7 +37,7 @@ class TopChefs extends StatelessWidget {
               body: Center(
                 child: Text(
                   'Maʼlumotlar topilmadi',
-                  style: TextStyle(color: Colors.black, fontSize: 16),
+                  style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
             );

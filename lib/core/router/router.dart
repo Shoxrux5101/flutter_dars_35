@@ -15,7 +15,7 @@ import '../../features/trending_recipe/pages/your_recipes.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: RouterName.loginPage,
+    initialLocation: RouterName.chefsPage,
     routes: [
       GoRoute(
         path: RouterName.onboardingPage,

@@ -14,8 +14,7 @@ import 'data/repository/recipes/repository/recipe_repository.dart';
 import 'data/repository/reviews/repository/reviews_repository.dart';
 
 void main() {
-  runApp(MyApp()
-  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -25,24 +24,50 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(430, 932),
-        child:MultiProvider(
-            providers:[
-              Provider(create: (context) => FlutterSecureStorage()),
-              Provider(create: (context) => AuthInterceptor(secureStorage: context.read())),
-              Provider(create: (context) => ApiClient(interceptor: context.read())),
-              Provider(create: (context) => AuthenticationRepository(dioClient: context.read<ApiClient>(),),),
-              Provider(create: (context) =>RecipesRepository(dioClient: context.read<ApiClient>()),),
-              Provider(create: (context) =>ReviewsRepository(dioClient: context.read<ApiClient>()),),
-              Provider(create: (context) =>CategoryRepository(dioClient: context.read<ApiClient>(),),),
-              Provider(create: (context) => TopChefsProfileRepository(dioClient: context.read(),),),
-            ],
-            //providers: dependencies,
+      child: MultiProvider(
+        providers: [
+          Provider(create: (context) => FlutterSecureStorage()),
+          Provider(
+            create: (context) => AuthInterceptor(secureStorage: context.read()),
+          ),
+          Provider(create: (context) => ApiClient(interceptor: context.read())),
+          Provider(
+            create: (context) => AuthenticationRepository(
+              dioClient: context.read<ApiClient>(),
+            ),
+          ),
+          Provider(
+            create: (context) =>
+                RecipesRepository(dioClient: context.read<ApiClient>()),
+          ),
+          Provider(
+            create: (context) =>
+                ReviewsRepository(dioClient: context.read<ApiClient>()),
+          ),
+          Provider(
+            create: (context) => CategoryRepository(
+              dioClient: context.read<ApiClient>(),
+            ),
+          ),
+          Provider(
+            create: (context) => TopChefsProfileRepository(
+              dioClient: context.read(),
+            ),
+          ),
+        ],
+        //providers: dependencies,
         child: MaterialApp.router(
-          theme: ThemeData(scaffoldBackgroundColor: AppColors.beige),
+          theme: ThemeData(
+            scaffoldBackgroundColor: AppColors.beige,
+            appBarTheme: AppBarTheme(
+              backgroundColor: Colors.transparent,
+              surfaceTintColor: Colors.transparent,
+            ),
+          ),
           debugShowCheckedModeBanner: false,
           routerConfig: AppRouter.router,
         ),
-        ),
+      ),
     );
   }
 }

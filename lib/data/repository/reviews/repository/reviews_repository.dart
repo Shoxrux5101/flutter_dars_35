@@ -8,6 +8,7 @@ class ReviewsRepository {
   ReviewsRepository({required ApiClient dioClient}) : _dioClient = dioClient;
 
   Future<Result<ReviewsModel>> getRecipeReviews(int recipeId) async {
+    print(recipeId);
     try {
       final result = await _dioClient.get('/recipes/reviews/detail/$recipeId');
 

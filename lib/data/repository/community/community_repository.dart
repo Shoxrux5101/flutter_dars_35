@@ -8,8 +8,7 @@ class CommunityRepository {
   CommunityRepository(this._apiClient);
 
   Future<List<CommunityModel>> getCommunity() async {
-    final result = await _apiClient.get<List<dynamic>>('/recipes/community/list');
-
+    final result = await _apiClient.get('/recipes/community/list');
     return result.fold(
           (error) => throw Exception(error.toString()),
           (value) {
