@@ -23,7 +23,7 @@ class ReviewsPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => ReviewsViewModel(
         repository: ReviewsRepository(dioClient: ApiClient(interceptor: AuthInterceptor(secureStorage: FlutterSecureStorage()),),),
-        recipeId: id,
+        id: id,
       ),
       builder: (context, child) => Scaffold(
         extendBody: true,

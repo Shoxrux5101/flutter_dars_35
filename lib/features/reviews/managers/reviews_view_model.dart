@@ -1,43 +1,36 @@
-import 'package:flutter/material.dart';
-import '../../../data/models/reviews_model.dart';
+import 'package:flutter/cupertino.dart';
+
 import '../../../data/repository/reviews/repository/reviews_repository.dart';
 
 class ReviewsViewModel extends ChangeNotifier {
   final ReviewsRepository _repository;
-  final int recipeId;
+  final int id;
 
   ReviewsViewModel({
     required ReviewsRepository repository,
-    required this.recipeId,
+    required this.id,
   }) : _repository = repository {
-    loadReviews();
+    getRecipeDetail();
   }
 
   bool isLoading = false;
   String? errorMessage;
-  ReviewsModel? review;
+  Map<String, dynamic>? recipeData;
 
-  Future<void> loadReviews() async {
-    isLoading = true;
-    errorMessage = null;
-    review = null;
-    notifyListeners();
+  Future<void> getRecipeDetail() async {
+    try {
+      isLoading = true;
+      errorMessage = null;
+      notifyListeners();
 
-    final result = await _repository.getRecipeReviews(recipeId);
+      final result = await _repository.getRecipeDetail(id);
 
-    result.fold(
-          (error) {
-            print("error: $error");
-        errorMessage = error.toString();
-      },
-          (data) {
-            print("data: $data");
-        review = data;
-      },
-    );
-
-    isLoading = false;
-    notifyListeners();
+      recipeData = result;
+    } catch (e) {
+      errorMessage = e.toString();
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
   }
 }
-
