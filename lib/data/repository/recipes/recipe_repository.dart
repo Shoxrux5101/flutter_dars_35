@@ -1,6 +1,6 @@
 import 'package:untitled3/core/network/api_client.dart';
 import 'package:untitled3/core/utils/result.dart';
-import '../../../models/recipe_model.dart';
+import '../../models/recipe_model.dart';
 
 class RecipesRepository {
   final ApiClient _dioClient;

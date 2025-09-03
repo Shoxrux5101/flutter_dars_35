@@ -11,7 +11,6 @@ class CategoryRepository {
   Future<Result<List<CategoryModel>>> getCategories() async {
     try {
       final result = await _dioClient.get("/category/list");
-
       return result.fold(
             (error) => Result.error(error),
             (data) {

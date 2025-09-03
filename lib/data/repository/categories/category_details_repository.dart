@@ -11,7 +11,7 @@ class CategoryDetailsRepository {
   Future<Result<CategoryDetailsModel>> getCategoryDetails() async {
     try {
       final result = await _dioClient.get("/category/detail");
-
+      print(result);
       return result.fold(
             (error) => Result.error(error),
             (data) => Result.ok(CategoryDetailsModel.fromJson(data)),
