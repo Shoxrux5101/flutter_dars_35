@@ -1,6 +1,6 @@
 import 'package:untitled3/data/models/recipe_model.dart';
-import '../../../../core/network/api_client.dart';
-import '../../../../core/utils/result.dart';
+import '../../../core/network/api_client.dart';
+import '../../../core/utils/result.dart';
 
 class TopChefsProfileRepository {
   final ApiClient _dioClient;

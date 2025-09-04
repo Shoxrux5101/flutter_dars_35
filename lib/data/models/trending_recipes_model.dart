@@ -20,13 +20,13 @@ class TrendingRecipesModel {
 
   factory TrendingRecipesModel.fromJson(Map<String, dynamic> json) {
     return TrendingRecipesModel(
-      id: json['id'] ?? 0,
-      categoryId: json['categoryId'] ?? 0,
+      id: json['id'] ,
+      categoryId: json['categoryId'] ,
       title: json['title'] ?? '',
-      description: json['description'] ?? '',
-      photo: json['photo'] ?? '',
-      timeRequired: json['timeRequired'] ?? 0,
-      rating: json['rating'] ?? 0,
+      description: json['description'] ,
+      photo: json['photo'] ,
+      timeRequired: json['timeRequired'] ,
+      rating: json['rating'] ,
     );
   }
 }

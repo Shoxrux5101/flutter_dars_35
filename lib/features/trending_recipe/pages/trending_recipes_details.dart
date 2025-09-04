@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled3/core/utils/app_colors.dart';
 import 'package:untitled3/features/trending_recipe/widgets/followButton.dart';
+import '../../../core/router/routes.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
 import '../../categories/managers/categopry_details_view_model.dart';
 import '../widgets/custom_trending_app_bar.dart';
-
 
 class TrendingRecipesDetails extends StatelessWidget {
   const TrendingRecipesDetails({super.key, required this.recipeId});
@@ -32,14 +33,16 @@ class TrendingRecipesDetails extends StatelessWidget {
             );
           }
           return Scaffold(
-            appBar: CustomTrendingAppBar(title: detail.title,),
+            appBar: CustomTrendingAppBar(
+              title: detail.title,
+            ),
             body: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: 37.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 50.h),
-                  buildHeaderCard(detail),
+                  buildHeaderCard(context, detail),
                   SizedBox(height: 26.h),
                   buildUserInfo(detail),
                   SizedBox(height: 20.h),
@@ -60,7 +63,7 @@ class TrendingRecipesDetails extends StatelessWidget {
     );
   }
 
-  Widget buildHeaderCard(detail) {
+  Widget buildHeaderCard(BuildContext context, detail) {
     return Container(
       height: 337.h,
       decoration: BoxDecoration(
@@ -104,7 +107,7 @@ class TrendingRecipesDetails extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(horizontal: 10,vertical: 2),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -117,21 +120,41 @@ class TrendingRecipesDetails extends StatelessWidget {
                   ),
                 ),
                 Row(
+                  spacing: 10,
                   children: [
-                    SvgPicture.asset(
-                      'assets/icons/star.svg', color: AppColors.white,),
-                    Text(
-                      "${detail.rating}",
-                      style: TextStyle(fontSize: 12, color: Colors.black),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            context.go(
+                              Routes.reviewsPage,
+                              extra: {"id": recipeId},
+                            );
+                          },
+                          icon: SvgPicture.asset(
+                            'assets/icons/star.svg',
+                            color: AppColors.white,
+                          ),
+                        ),
+                        Text(
+                          "${detail.rating}",
+                          style: TextStyle(fontSize: 12, color: Colors.black),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 10.h),
-                    SvgPicture.asset(
-                      'assets/icons/community.svg', color: Colors.white,
-                      height: 10.h,),
-                    SizedBox(width: 5.h),
-                    Text(
-                      "${detail.reviewsCount}",
-                      style: TextStyle(fontSize: 12, color: Colors.black),
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/community.svg',
+                          color: Colors.white,
+                          height: 10.h,
+                        ),
+                        SizedBox(width: 5.h),
+                        Text(
+                          "${detail.reviewsCount}",
+                          style: TextStyle(fontSize: 12, color: Colors.black),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -142,6 +165,7 @@ class TrendingRecipesDetails extends StatelessWidget {
       ),
     );
   }
+
   Widget buildUserInfo(detail) {
     return Row(
       children: [
@@ -153,19 +177,28 @@ class TrendingRecipesDetails extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(detail.user.username,
-                style: TextStyle(fontSize: 12, color: AppColors.redPinkMain)),
-            Text(detail.user.firstName,
-                style: TextStyle(fontSize: 12, color: Colors.white)),
+            Text(
+              detail.user.username,
+              style: TextStyle(fontSize: 12, color: AppColors.redPinkMain),
+            ),
+            Text(
+              detail.user.firstName,
+              style: TextStyle(fontSize: 12, color: Colors.white),
+            ),
           ],
         ),
         Spacer(),
-        FollowButton(width: 109.w,height: 21.h, textSize: 12,),
+        FollowButton(
+          width: 109.w,
+          height: 21.h,
+          textSize: 12,
+        ),
         SizedBox(width: 9.w),
         Icon(Icons.more_vert, color: AppColors.redPinkMain),
       ],
     );
   }
+
   Widget buildDetails(detail) {
     return Column(
       children: [
@@ -186,14 +219,20 @@ class TrendingRecipesDetails extends StatelessWidget {
               width: 20.w,
             ),
             SizedBox(width: 5.w),
-            Text("${detail.timeRequired}min",
-                style: TextStyle(color: Colors.white)),
+            Text(
+              "${detail.timeRequired}min",
+              style: TextStyle(color: Colors.white),
+            ),
           ],
         ),
-        Text(detail.description,style: TextStyle(color: AppColors.white),)
+        Text(
+          detail.description,
+          style: TextStyle(color: AppColors.white),
+        ),
       ],
     );
   }
+
   Widget buildIngredients(detail) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -214,6 +253,7 @@ class TrendingRecipesDetails extends StatelessWidget {
       ],
     );
   }
+
   Widget buildInstructions(detail) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

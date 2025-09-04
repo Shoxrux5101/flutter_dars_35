@@ -1,6 +1,6 @@
 import 'package:untitled3/core/network/api_client.dart';
 import 'package:untitled3/data/models/chefs_model.dart';
-import '../../../../core/utils/result.dart';
+import '../../../core/utils/result.dart';
 
 class ChefsRepository {
   final ApiClient _dioClient;

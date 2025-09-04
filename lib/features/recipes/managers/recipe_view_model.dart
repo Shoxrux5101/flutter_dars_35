@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:untitled3/data/models/recipe_model.dart';
 import 'package:untitled3/data/models/category_model.dart';
-import '../../../data/repository/categories/repository/category_repository.dart';
-import '../../../data/repository/recipes/repository/recipe_repository.dart';
+import '../../../data/repository/categories/category_repository.dart';
+import '../../../data/repository/recipes/recipe_repository.dart';
 
 class RecipeViewModel extends ChangeNotifier {
   final RecipesRepository _recipesRepository;

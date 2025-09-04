@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '../../../core/router/router_name.dart';
+import '../../../core/router/routes.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
 import '../../../core/widgets/custom_app_bar.dart';
-import '../../../data/repository/categories/repository/category_repository.dart';
-import '../../../data/repository/recipes/repository/recipe_repository.dart';
+import '../../../data/repository/categories/category_repository.dart';
+import '../../../data/repository/recipes/recipe_repository.dart';
 import '../managers/recipe_view_model.dart';
 
 class RecipePage extends StatelessWidget {
@@ -93,7 +93,7 @@ class RecipePage extends StatelessWidget {
                       itemBuilder: (context, index) => GestureDetector(
                         onTap: () {
                           context.push(
-                            RouterName.categoryDetailsPage,
+                            Routes.categoryDetailsPage,
                             extra: vm.recipes[index].id,
                           );
                         },

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled3/data/models/trending_recipes_model.dart';
-import '../../../data/repository/trending_recipes/repository/trending_recipes_repository.dart';
+import '../../../data/repository/trending_recipes/trending_recipes_repository.dart';
 
 class TrendingRecipesViewModel extends ChangeNotifier {
   final TrendingRecipesRepository _repository;

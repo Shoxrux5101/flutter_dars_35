@@ -6,7 +6,7 @@ import 'package:untitled3/features/top_chefs/widgets/top_chefs_profile_app_bar.d
 import '../../../core/authInterceptor.dart';
 import '../../../core/network/api_client.dart';
 import '../../../data/models/chefs_model.dart';
-import '../../../data/repository/chefs/repository/top_chefs_profile_repository.dart';
+import '../../../data/repository/chefs/top_chefs_profile_repository.dart';
 import '../managers/top_chefs_profile_view_model.dart';
 import '../widgets/top_chefs_profile_header.dart';
 import '../widgets/top_chefs_profile_grid.dart';

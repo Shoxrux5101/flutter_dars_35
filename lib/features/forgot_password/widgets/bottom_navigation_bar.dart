@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/router/router_name.dart';
+import '../../../core/router/routes.dart';
 import '../../../core/utils/app_colors.dart';
 
 class BottomNavigationBarr extends StatelessWidget {
@@ -14,7 +14,7 @@ class BottomNavigationBarr extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 112, vertical: 48),
       child: GestureDetector(
         onTap: () {
-          context.go(RouterName.forgotPasswordPage);
+          context.go(Routes.forgotPasswordPage);
         },
         child: Container(
           decoration: BoxDecoration(

@@ -6,7 +6,9 @@ class ApiClient {
   ApiClient({required this.interceptor}){
   _dio = Dio(
     BaseOptions(
-      baseUrl: "https://7a3c890bf239.ngrok-free.app/api/v1",
+      baseUrl: "http://192.168.11.156:8888/api/v1",
+      connectTimeout: Duration(seconds: 5),
+      receiveTimeout: Duration(seconds: 5),
       validateStatus: (status) => true,
     ),
   )..interceptors.add(

@@ -1,5 +1,4 @@
 import 'package:untitled3/data/models/community_model.dart';
-
 import '../../../core/network/api_client.dart';
 
 class CommunityRepository {

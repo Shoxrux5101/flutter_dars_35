@@ -13,7 +13,6 @@ class CategoryPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => CategoryPageViewModel(),
       builder: (context, child) => Scaffold(
-        backgroundColor: Color(0xFF1C0F0D),
         extendBody: true,
         appBar: CustomAppBar(
           title: "Categories",

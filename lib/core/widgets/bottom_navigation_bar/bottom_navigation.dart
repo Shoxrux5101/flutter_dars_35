@@ -10,8 +10,8 @@ class BottomNavigation extends StatelessWidget {
     return Stack(
       alignment: Alignment.topCenter,
       children: [
+        BottomNavigationBarGradient(),
         BottomNavigationBarMain(),
-        BottomNavigationBarGradient()
       ],
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled3/data/models/chefs_model.dart';
-import 'package:untitled3/data/repository/chefs/repository/chefs_repository.dart';
+import 'package:untitled3/data/repository/chefs/chefs_repository.dart';
 
 class TopChefsViewModel extends ChangeNotifier {
   final ChefsRepository _repository;

@@ -7,11 +7,11 @@ import 'package:untitled3/core/router/router.dart';
 import 'package:untitled3/core/utils/app_colors.dart';
 import 'core/authInterceptor.dart';
 import 'core/dependencies.dart';
-import 'data/repository/authentication/repository/authentication_repository.dart';
-import 'data/repository/categories/repository/category_repository.dart';
-import 'data/repository/chefs/repository/top_chefs_profile_repository.dart';
-import 'data/repository/recipes/repository/recipe_repository.dart';
-import 'data/repository/reviews/repository/reviews_repository.dart';
+import 'data/repository/authentication/authentication_repository.dart';
+import 'data/repository/categories/category_repository.dart';
+import 'data/repository/chefs/top_chefs_profile_repository.dart';
+import 'data/repository/recipes/recipe_repository.dart';
+import 'data/repository/reviews/reviews_repository.dart';
 
 void main() {
   runApp(MyApp());
@@ -41,8 +41,9 @@ class MyApp extends StatelessWidget {
                 RecipesRepository(dioClient: context.read<ApiClient>()),
           ),
           Provider(
-            create: (context) =>
-                ReviewsRepository(dioClient: context.read<ApiClient>()),
+            create: (context) => ReviewsRepository(
+              context.read<ApiClient>(),
+            ),
           ),
           Provider(
             create: (context) => CategoryRepository(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled3/core/network/api_client.dart';
-import 'package:untitled3/data/repository/chefs/repository/chefs_repository.dart';
+import 'package:untitled3/data/repository/chefs/chefs_repository.dart';
 import 'package:untitled3/features/top_chefs/widgets/most_liked_chefs.dart';
 import 'package:untitled3/features/top_chefs/widgets/most_viewed_chefs.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';

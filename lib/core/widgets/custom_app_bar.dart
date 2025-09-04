@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../router/routes.dart';
 import '../utils/app_colors.dart';
 
 
@@ -60,7 +61,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
         Padding(
           padding:  EdgeInsets.only(right: 24),
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Routes.settings;
+            },
             child: Container(
               width: 40,
               height: 40,

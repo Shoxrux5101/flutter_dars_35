@@ -7,7 +7,7 @@ import 'package:untitled3/features/login_register/widgets/email_input_field.dart
 import 'package:untitled3/features/login_register/widgets/password_input_field.dart';
 import '../../../core/authInterceptor.dart';
 import '../../../core/utils/app_colors.dart';
-import '../../../data/repository/authentication/repository/authentication_repository.dart';
+import '../../../data/repository/authentication/authentication_repository.dart';
 
 class Login extends StatefulWidget {
   Login({super.key});

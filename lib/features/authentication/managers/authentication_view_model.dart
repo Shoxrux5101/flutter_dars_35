@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/repository/authentication/repository/authentication_repository.dart';
+import '../../../data/repository/authentication/authentication_repository.dart';
 
 class AuthenticationViewModel extends ChangeNotifier {
   final AuthenticationRepository _repository;

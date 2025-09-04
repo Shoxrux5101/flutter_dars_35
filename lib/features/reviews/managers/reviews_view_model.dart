@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../data/repository/reviews/repository/reviews_repository.dart';
+import '../../../data/repository/reviews/reviews_repository.dart';
 
 class ReviewsViewModel extends ChangeNotifier {
   final ReviewsRepository _repository;
@@ -25,7 +25,14 @@ class ReviewsViewModel extends ChangeNotifier {
 
       final result = await _repository.getRecipeDetail(id);
 
-      recipeData = result;
+      result.fold(
+        (error) {
+          errorMessage = error.toString();
+        },
+        (data) {
+          recipeData = data;
+        },
+      );
     } catch (e) {
       errorMessage = e.toString();
     } finally {

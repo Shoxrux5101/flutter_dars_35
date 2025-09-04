@@ -9,7 +9,7 @@ import '../../../core/authInterceptor.dart';
 import '../../../core/network/api_client.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
-import '../../../data/repository/reviews/repository/reviews_repository.dart';
+import '../../../data/repository/reviews/reviews_repository.dart';
 import '../managers/reviews_view_model.dart';
 import '../widget/rating_stars.dart';
 
@@ -22,7 +22,13 @@ class ReviewsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => ReviewsViewModel(
-        repository: ReviewsRepository(dioClient: ApiClient(interceptor: AuthInterceptor(secureStorage: FlutterSecureStorage()),),),
+        repository: ReviewsRepository(
+          ApiClient(
+            interceptor: AuthInterceptor(
+              secureStorage: FlutterSecureStorage(),
+            ),
+          ),
+        ),
         id: id,
       ),
       builder: (context, child) => Scaffold(

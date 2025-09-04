@@ -1,5 +1,5 @@
 
-class RouterName {
+class Routes {
   static String onboardingPage="/cookinglevel";
   static String categoryPage="/categories";
   static String recipePage="/recipes";
@@ -13,4 +13,8 @@ class RouterName {
   static String chefsPage = '/chefs';
   static String reviewsPage = '/reviews';
   static String communityPage = '/community';
+  static String addRecipes = '/add-recipes';
+  static String profile = '/profile';
+  static String settings = '/floating_menu_profile';
+  static String notification = '/notification';
 }

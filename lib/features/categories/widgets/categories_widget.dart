@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled3/core/router/router_name.dart';
+import 'package:untitled3/core/router/routes.dart';
 import '../../../core/utils/app_colors.dart';
 import '../managers/category_page_view_model.dart';
 
@@ -20,7 +20,7 @@ class CategoriesWidget extends StatelessWidget {
               shrinkWrap: true,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: (){
-                  context.push(RouterName.recipePage,extra: {
+                  context.push(Routes.recipePage,extra: {
                     'id' : vm.categories[index].id,
                   });
                 },

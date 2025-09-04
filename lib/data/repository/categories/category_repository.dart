@@ -1,6 +1,6 @@
-import '../../../../core/network/api_client.dart';
-import '../../../../core/utils/result.dart';
-import '../../../models/category_model.dart';
+import '../../../core/network/api_client.dart';
+import '../../../core/utils/result.dart';
+import '../../models/category_model.dart';
 
 class CategoryRepository {
   final ApiClient _dioClient;
@@ -9,7 +9,6 @@ class CategoryRepository {
       : _dioClient = dioClient;
 
   Future<Result<List<CategoryModel>>> getCategories() async {
-    try {
       final result = await _dioClient.get("/category/list");
       return result.fold(
             (error) => Result.error(error),
@@ -20,8 +19,5 @@ class CategoryRepository {
           return Result.ok(categories);
         },
       );
-    } catch (e) {
-      return Result.error(Exception(e.toString()));
-    }
   }
 }

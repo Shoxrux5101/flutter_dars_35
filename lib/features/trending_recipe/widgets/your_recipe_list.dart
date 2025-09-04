@@ -19,17 +19,6 @@ class YourRecipeList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 36),
-          child: Text(
-            'See All',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 12,
-              color: AppColors.redPinkMain,
-            ),
-          ),
-        ),
         Expanded(
           child: GridView.builder(
             padding: EdgeInsets.symmetric(horizontal: 16),
