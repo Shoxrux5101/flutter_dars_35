@@ -3,13 +3,13 @@ import 'package:untitled3/core/utils/result.dart';
 import 'package:untitled3/data/models/login_model.dart';
 
 class LoginRepository {
-  final ApiClient _client;
+  final ApiClient _apiClient;
 
-  LoginRepository({required ApiClient client}) : _client = client;
+  LoginRepository({required ApiClient apiClient}) : _apiClient = apiClient;
 
   Future<Result<LoginModel>> loginUser(String login, String password) async {
     try {
-      final response = await _client.post(
+      final response = await _apiClient.post(
         '/login',
         data: {
           'login': login,

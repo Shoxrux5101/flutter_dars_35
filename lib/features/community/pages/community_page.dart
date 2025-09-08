@@ -11,7 +11,7 @@ import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
 import '../../../data/repository/community/community_repository.dart';
 import '../managers/community_view_model.dart';
-import '../widget/community_bottom_app_bar.dart';
+import '../../categories/pages/category_details_page.dart';
 
 class CommunityPage extends StatefulWidget {
   const CommunityPage({super.key});
@@ -26,225 +26,228 @@ class _CommunityPageState extends State<CommunityPage> {
     return ChangeNotifierProvider(
       create: (context) => CommunityViewModel(
         CommunityRepository(
-          ApiClient(
+          apiClient: ApiClient(
             interceptor: AuthInterceptor(secureStorage: FlutterSecureStorage()),
           ),
         ),
-      ),
+      )..getCommunity(),
       builder: (context, child) => Consumer<CommunityViewModel>(
         builder: (context, vm, child) {
           if (vm.isLoading) {
-            return Center(child: CircularProgressIndicator());
+            return Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            );
+          }
+          if (vm.errorMessage != null) {
+            return Scaffold(
+              body: Center(child: Text('Error: ${vm.errorMessage}')),
+            );
           }
           if (vm.recipes.isEmpty) {
-            return Center(child: Text("No recipes found"));
+            return Scaffold(
+              body: Center(child: Text("No recipes found")),
+            );
           }
           return Scaffold(
+            extendBody: true,
             appBar: CommunityAppBar(),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.only(right: 36.w, left: 36.w),
-                child: Column(
-                  children: [
-                    SizedBox(height: 22.h),
-                    ...List.generate(vm.recipes.length, (index) {
-                      final items = vm.recipes[index];
-                      return SizedBox(
-                        width: 356.w,
-                        height: 320.h,
-                        child: Column(
+            body: ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 36.w, vertical: 22.h),
+              itemCount: vm.recipes.length,
+              itemBuilder: (context, index) {
+                final items = vm.recipes[index];
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CategoryDetailsPage(recipeId: items.id),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(bottom: 22.h),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(17.r),
-                                  child: Image.network(
-                                    items.user.profilePhoto,
-                                    width: 35.w,
-                                    height: 35.h,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                SizedBox(width: 14),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '@${items.user.username}',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400,
-                                        color: AppColors.white,
-                                      ),
-                                    ),
-                                    Text(
-                                      '${items.created.month} Month ago',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w400,
-                                        color: AppColors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(17.r),
+                              child: Image.network(
+                                items.user.profilePhoto,
+                                width: 35.w,
+                                height: 35.h,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            SizedBox(
-                              height: 22.h,
-                            ),
+                            SizedBox(width: 14.w),
                             Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(14),
-                                    topLeft: Radius.circular(14),
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      Image.network(
-                                        items.photo,
-                                        width: double.infinity,
-                                        height: 173.h,
-                                        fit: BoxFit.cover,
-                                      ),
-                                      Positioned(
-                                        right: 10,
-                                        top: 5,
-                                        child: LikeButton(),
-                                      ),
-                                    ],
+                                Text(
+                                  '@${items.user.username}',
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.white,
                                   ),
                                 ),
-                                Container(
-                                  width: 356.w,
-                                  height: 79.h,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.redPinkMain,
-                                    borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(14),
-                                      bottomLeft: Radius.circular(14),
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      top: 0,
-                                      left: 15,
-                                      right: 15,
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                items.title,
-                                                style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: AppColors.white,
-                                                ),
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                            SizedBox(width: 6.w),
-                                            SvgPicture.asset(
-                                              "assets/icons/star.svg",
-                                              color: AppColors.white,
-                                              width: 10.w,
-                                            ),
-                                            Text(
-                                              items.rating.toString(),
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppColors.white,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 258.w,
-                                              height: 45.h,
-                                              child: Text(
-                                                items.description,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w300,
-                                                  color: AppColors.white,
-                                                ),
-                                              ),
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:CrossAxisAlignment.end,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    SvgPicture.asset(
-                                                      "assets/icons/clock.svg",
-                                                      color: AppColors.white,
-                                                      width: 10,
-                                                    ),
-                                                    SizedBox(width: 3),
-                                                    Text(
-                                                      '${items.timeRequired} min',
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: AppColors.white,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      items.reviewsCount
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: AppColors.white,
-                                                      ),
-                                                    ),
-                                                    SizedBox(width: 3),
-                                                    SvgPicture.asset(
-                                                      "assets/icons/reviews.svg",
-                                                      color: AppColors.white,
-                                                      width: 10.w,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                Text(
+                                  '${items.created.month} Month ago',
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.white,
                                   ),
                                 ),
                               ],
-                            ),
-                            SizedBox(
-                              height: 14.h,
-                            ),
-                            Container(
-                              width: double.infinity,
-                              height: 1.h,
-                              color: AppColors.pinkSub,
                             ),
                           ],
                         ),
-                      );
-                    }),
-                  ],
-                ),
-              ),
+
+                        SizedBox(height: 22.h),
+                        Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(14.r),
+                              child: Image.network(
+                                items.photo,
+                                width: double.infinity,
+                                height: 173.h,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Positioned(
+                              right: 15.w,
+                              top: 15.h,
+                              child: LikeButton(),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.all(15.w),
+                          decoration: BoxDecoration(
+                            color: AppColors.redPinkMain,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(14.r),
+                              bottomLeft: Radius.circular(14.r),
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      items.title,
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.white,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(width: 6.w),
+                                  SvgPicture.asset(
+                                    "assets/icons/star.svg",
+                                    color: AppColors.white,
+                                    width: 10.w,
+                                  ),
+                                  Text(
+                                    items.rating.toString(),
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 8.h),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      items.description,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w300,
+                                        color: AppColors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 16.w),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                            "assets/icons/clock.svg",
+                                            color: AppColors.white,
+                                            width: 10.w,
+                                          ),
+                                          SizedBox(width: 3.w),
+                                          Text(
+                                            '${items.timeRequired} min',
+                                            style: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w400,
+                                              color: AppColors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 4.h),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            items.reviewsCount.toString(),
+                                            style: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w400,
+                                              color: AppColors.white,
+                                            ),
+                                          ),
+                                          SizedBox(width: 3.w),
+                                          SvgPicture.asset(
+                                            "assets/icons/reviews.svg",
+                                            color: AppColors.white,
+                                            width: 10.w,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(height: 14.h),
+                        Container(
+                          width: double.infinity,
+                          height: 1.h,
+                          color: AppColors.pinkSub,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
             bottomNavigationBar: BottomNavigation(),
           );

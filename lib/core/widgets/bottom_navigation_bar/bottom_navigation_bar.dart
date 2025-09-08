@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:untitled3/core/router/routes.dart';
 import '../../utils/app_colors.dart';
 
 class BottomNavigationBarMain extends StatelessWidget {
@@ -19,10 +21,10 @@ class BottomNavigationBarMain extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SvgPicture.asset("assets/icons/home.svg"),
-            SvgPicture.asset("assets/icons/community.svg"),
-            SvgPicture.asset("assets/icons/categories.svg"),
-            SvgPicture.asset("assets/icons/profile.svg"),
+            IconButton(onPressed: (){context.go(Routes.homePage);}, icon: SvgPicture.asset("assets/icons/home.svg"),),
+            IconButton(onPressed: (){context.go(Routes.communityPage);}, icon: SvgPicture.asset("assets/icons/community.svg"),),
+            IconButton(onPressed: (){context.go(Routes.categoryPage);}, icon: SvgPicture.asset("assets/icons/categories.svg"),),
+            IconButton(onPressed: (){context.go(Routes.profile);}, icon: SvgPicture.asset("assets/icons/profile.svg"),),
           ],
         ),
       ),

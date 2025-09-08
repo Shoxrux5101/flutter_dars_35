@@ -12,7 +12,7 @@ class RecipeViewModel extends ChangeNotifier {
   RecipeViewModel({
     required RecipesRepository recipesRepository,
     required CategoryRepository categoryRepository,
-    required this.catId,
+     this.catId =0,
   })  : _recipesRepository = recipesRepository,
         _categoryRepository = categoryRepository {
     selectedCategoryId = catId;
@@ -57,7 +57,7 @@ class RecipeViewModel extends ChangeNotifier {
     categories = [];
     notifyListeners();
 
-    final result = await _categoryRepository.getCategories();
+    final result = await _categoryRepository.getAll();
     result.fold(
           (error) {
         errorMessage = error.toString();

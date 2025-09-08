@@ -24,8 +24,8 @@ class TabbarWidget extends StatelessWidget {
           ),
           TabBarView(
             children: [
-              Center(child: Text("Recipe page content")),
-              Center(child: Text("Favorites page content")),
+              Center(child: Text("Recipe pages content")),
+              Center(child: Text("Favorites pages content")),
             ],
           ),
         ],

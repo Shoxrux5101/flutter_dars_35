@@ -9,7 +9,7 @@
 // import '../features/top_chefs/managers/top_chefs_view_model.dart';
 // import 'network/api_client.dart';
 //
-// final dependencies = [
+// final dependencies = <SingleChildWidget>[
 //   Provider(create: (context) => FlutterSecureStorage()),
 //   Provider(create: (context) => AuthInterceptor(secureStorage: context.read())),
 //   Provider(create: (context) => ApiClient(interceptor: context.read())),

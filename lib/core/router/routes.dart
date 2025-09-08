@@ -1,6 +1,8 @@
 
 class Routes {
+  static String onboarding="/onboarding";
   static String onboardingPage="/cookinglevel";
+  static String homePage = "/home";
   static String categoryPage="/categories";
   static String recipePage="/recipes";
   static String categoryDetailsPage="/categoryDetails";
@@ -17,4 +19,5 @@ class Routes {
   static String profile = '/profile';
   static String settings = '/floating_menu_profile';
   static String notification = '/notification';
+  static String followers = '/follower';
 }

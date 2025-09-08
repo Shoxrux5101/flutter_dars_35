@@ -3,16 +3,19 @@ import 'package:untitled3/core/utils/result.dart';
 import '../../models/recipe_model.dart';
 
 class RecipesRepository {
-  final ApiClient _dioClient;
+  final ApiClient _apiClient;
 
-  RecipesRepository({required ApiClient dioClient}) : _dioClient = dioClient;
+  RecipesRepository({required ApiClient apiClient}) : _apiClient = apiClient;
 
   Future<Result<List<RecipeModel>>> getRecipe() async {
     try {
-      final result = await _dioClient.get('/recipes/list');
+      final result = await _apiClient.get('/recipes/list');
       return result.fold(
-            (error) => Result.error(error),
+            (error)  {
+
+              return Result.error(error);},
             (data) {
+
           final recipes = (data as List)
               .map((json) => RecipeModel.fromJson(json))
               .toList();
@@ -20,8 +23,10 @@ class RecipesRepository {
         },
       );
     } on Exception catch (e) {
+
       return Result.error(e);
     } catch (e) {
+
       return Result.error(Exception(e.toString()));
     }
   }

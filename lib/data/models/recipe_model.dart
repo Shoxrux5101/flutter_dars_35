@@ -21,14 +21,15 @@ class RecipeModel {
   });
 
   factory RecipeModel.fromJson(Map<String, dynamic>json){
-    return RecipeModel(id: json['id'],
-      categoryId: json['categoryId'],
-      title: json['title'],
-      description: json['description'],
-      photo: json['photo'],
-      timeRequired: json['timeRequired'],
-      rating: json['rating'],
-      difficulty: json['difficulty'],
+    return RecipeModel(
+      id: json['id'] ?? 0,
+      categoryId: json['categoryId'] ?? 0,
+      title: json['title'] ?? "",
+      description: json['description'] ?? "",
+      photo: json['photo'] ?? "",
+      timeRequired: json['timeRequired'] ?? 0,
+      rating: json['rating'] ?? 0,
+      difficulty: json['difficulty'] ?? "",
     );
   }
 }

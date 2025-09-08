@@ -5,6 +5,7 @@ import 'package:untitled3/features/login_register/widgets/email_input_field.dart
 import 'package:untitled3/features/login_register/widgets/mobile_number.dart';
 import 'package:untitled3/features/login_register/widgets/password_input_field.dart';
 import '../../../core/utils/app_colors.dart';
+import '../widgets/success_dialog.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -32,6 +33,24 @@ class _SignUpState extends State<SignUp> {
     super.dispose();
   }
 
+  void _handleSignUp() {
+    if (fullNameController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Full name required")),
+      );
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) => SuccessDialog(
+        title: "Sign Up Successful!",
+        message:
+            "Lorem ipsum dolor sit amet pretium cras id dui pellentesque ornare. Quisque malesuada. ",
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +64,8 @@ class _SignUpState extends State<SignUp> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 37.h),
         child: Column(
-          spacing: 5.h,
           children: [
-            SizedBox(height: 80.h,),
+            SizedBox(height: 80.h),
             EmailInput(
               text: 'Full Name',
               hintText: 'John Doe',
@@ -76,50 +94,59 @@ class _SignUpState extends State<SignUp> {
               text: 'Confirm Password',
               controller: confirmPasswordController,
             ),
-            SizedBox(height: 40.h,),
-            Text('By continuing, you agree to \nTerms of Use and Privacy Policy',style:
-              TextStyle(fontWeight: FontWeight.w400,fontSize: 14,color: AppColors.white,)
+            SizedBox(height: 40.h),
+            Text(
+              'By continuing, you agree to\nTerms of Use and Privacy Policy.',
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 12,
+                color: AppColors.white,
               ),
-            SizedBox(height: 12.h,),
+            ),
+            SizedBox(height: 12,),
             GestureDetector(
-              onTap: () {},
-              child: Center(
-                child: Container(
-                  width: 207.w,
-                  height: 45.h,
-                  decoration: BoxDecoration(
-                    color: AppColors.pink,
-                    borderRadius: BorderRadius.circular(30.r),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.pinkSub,
-                      ),
+              onTap: _handleSignUp,
+              child: Container(
+                width: 207.w,
+                height: 45.h,
+                decoration: BoxDecoration(
+                  color: AppColors.redPinkMain,
+                  borderRadius: BorderRadius.circular(30.r),
+                ),
+                child: Center(
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.white,
                     ),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 12.h,),
+            SizedBox(height: 12,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Already have an account?',style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w300,
-                  color: AppColors.white,
-                ),),
-                Text('Log In',style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w300,
-                  color: AppColors.redPinkMain,
-                ),),
+                Text(
+                  'Already have an account?',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    fontSize: 13,
+                    color: AppColors.white,
+                  ),
+                ),
+                Text(
+                  'Log In',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    fontSize: 13,
+                    color: AppColors.redPinkMain,
+                  ),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

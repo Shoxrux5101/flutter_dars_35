@@ -8,9 +8,12 @@ import 'package:untitled3/features/forgot_password/page/forgot_password.dart';
 import 'package:untitled3/features/onboarding/pages/onboarding_page.dart';
 import 'package:untitled3/features/profile/pages/profile_page.dart';
 import 'package:untitled3/features/trending_recipe/pages/trending_recipes_details.dart';
-import '../../features/floating_menu_profile/page/notification_page.dart';
-import '../../features/floating_menu_profile/page/settings.dart';
+import '../../features/floating_menu_profile/pages/notification_page.dart';
+import '../../features/floating_menu_profile/pages/settings.dart';
+import '../../features/followers_page/pages/following_page.dart';
+import '../../features/home_page/page/home_page.dart';
 import '../../features/login_register/page/login.dart';
+import '../../features/onboarding/pages/onboarding.dart';
 import '../../features/recipes/pages/recipe_page.dart';
 import '../../features/reviews/page/reviews_page.dart';
 import '../../features/top_chefs/pages/top_chefs.dart';
@@ -19,12 +22,24 @@ import '../../features/trending_recipe/pages/your_recipes.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.notification,
+    initialLocation: Routes.communityPage,
     routes: [
+      GoRoute(
+        path: Routes.onboarding,
+        builder: (context, state) {
+          return Onboarding();
+        },
+      ),
       GoRoute(
         path: Routes.onboardingPage,
         builder: (context, state) {
           return OnboardingPage();
+        },
+      ),
+      GoRoute(
+        path: Routes.homePage,
+        builder: (context, state) {
+          return HomePage();
         },
       ),
       GoRoute(
@@ -87,13 +102,17 @@ class AppRouter {
         builder: (context, state) {
           final extra = state.extra as Map<String, dynamic>;
           final catId = extra['id'];
-          return YourRecipes(catId: catId,);
+          return YourRecipes(
+            catId: catId,
+          );
         },
       ),
       GoRoute(
         path: Routes.chefsPage,
         builder: (context, state) {
-          return TopChefs( ids: [],);
+          return TopChefs(
+            ids: [],
+          );
         },
       ),
       GoRoute(
@@ -133,6 +152,12 @@ class AppRouter {
         builder: (context, state) {
           return NotificationPage();
         },
+      ),
+      GoRoute(
+        path: Routes.followers,
+        builder: (context, state) {
+          return FollowingPage();
+        }
       ),
     ],
   );

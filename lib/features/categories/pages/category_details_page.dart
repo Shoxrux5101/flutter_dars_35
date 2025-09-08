@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:untitled3/core/utils/app_colors.dart';
 import 'package:untitled3/core/widgets/custom_app_bar.dart';
 import 'package:untitled3/features/categories/managers/categopry_details_view_model.dart';
+import 'package:untitled3/features/trending_recipe/widgets/followButton.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
 
 class CategoryDetailsPage extends StatelessWidget {
@@ -127,19 +128,7 @@ class CategoryDetailsPage extends StatelessWidget {
           ],
         ),
         Spacer(),
-        Container(
-          width: 109,
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: AppColors.pink,
-          ),
-          child: Text(
-            'Following',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 12, color: Colors.red),
-          ),
-        ),
+        FollowButton(width: 109.w, height: 21, textSize: 15),
         SizedBox(width: 9.w),
         Icon(Icons.more_vert, color: Colors.white),
       ],

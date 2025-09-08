@@ -10,10 +10,11 @@ class CategoryPageViewModel extends ChangeNotifier {
   bool isCuisinesLoading = true;
   List<CategoryModel> categories = [];
 
+
   Future<void> fetchCategories() async {
     isCuisinesLoading = true;
     notifyListeners();
-    var response = await dio.get('/categories/list');
+    var response = await dio.get('/admin/categories/list');
 
     if (response.statusCode != 200) {
       error = response.data;

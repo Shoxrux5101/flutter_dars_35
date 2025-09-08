@@ -22,7 +22,7 @@ class TopChefsProfile extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => TopChefsProfileViewModel(
         repository: TopChefsProfileRepository(
-          dioClient: ApiClient(
+          apiClient: ApiClient(
             interceptor: AuthInterceptor(secureStorage: FlutterSecureStorage()),
           ),
         ),

@@ -40,6 +40,8 @@ dependencies:
   flutter_svg: ^2.2.0
   go_router: ^16.1.0
   flutter_secure_storage: ^9.2.4
+  path_provider: ^2.1.5
+  hive: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -53,13 +55,14 @@ dev_dependencies:
   flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+# following pages: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
   assets:
     - assets/
     - assets/icons/
+    - assets/onboarding/
 
 
   # The following line ensures that the Material Icons font is

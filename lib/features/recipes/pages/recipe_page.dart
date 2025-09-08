@@ -21,11 +21,15 @@ class RecipePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => RecipeViewModel(
+      create: (context) { final vm = RecipeViewModel(
         recipesRepository: context.read<RecipesRepository>(),
         categoryRepository: context.read<CategoryRepository>(),
         catId: catId,
-      ),
+      );
+        vm.fetchRecipes();
+        vm.fetchCategories();
+        return vm;
+      },
       builder: (context, child) => Consumer<RecipeViewModel>(
         builder: (context, vm, child) {
           if (vm.isLoading) {
@@ -34,8 +38,13 @@ class RecipePage extends StatelessWidget {
             );
           }
           return Scaffold(
+            extendBody: true,
             appBar: CustomAppBar(
-              title: vm.categories.singleWhere((x) => x.id == vm.catId).title,
+              title: vm.categories.isNotEmpty
+                  ? vm.categories
+                  .firstWhere(
+                    (x) => x.id == vm.selectedCategoryId,
+                orElse: () => vm.categories.first,).title : 'title',
             ),
             body: Padding(
               padding: EdgeInsets.symmetric(horizontal: 37),
@@ -48,8 +57,10 @@ class RecipePage extends StatelessWidget {
                       itemCount: vm.categories.length,
                       separatorBuilder: (_, __) => SizedBox(width: 10.w),
                       itemBuilder: (context, index) {
+
                         final category = vm.categories[index];
-                        final isActive = category.id == vm.catId;
+                        final isActive = category.id == vm.selectedCategoryId;
+
                         return GestureDetector(
                           onTap: () {
                             vm.changeCategory(category.id);
@@ -94,7 +105,7 @@ class RecipePage extends StatelessWidget {
                         onTap: () {
                           context.push(
                             Routes.categoryDetailsPage,
-                            extra: vm.recipes[index].id,
+                            extra: {"id":vm.recipes[index].id},
                           );
                         },
                         child: SizedBox(

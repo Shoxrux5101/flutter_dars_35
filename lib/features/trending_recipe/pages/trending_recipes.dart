@@ -28,7 +28,7 @@ class TrendingRecipes extends StatelessWidget {
             child: ChangeNotifierProvider(
               create: (context) {
                 final vm = TrendingRecipesViewModel(
-                  repository: TrendingRecipesRepository(dioClient: ApiClient(interceptor: AuthInterceptor(
+                  repository: TrendingRecipesRepository(apiClient: ApiClient(interceptor: AuthInterceptor(
                     secureStorage: FlutterSecureStorage(),
                   ),)),
                 );
@@ -40,7 +40,6 @@ class TrendingRecipes extends StatelessWidget {
                   if (vm.isLoading) {
                     return Center(child: CircularProgressIndicator());
                   }
-                  print(vm.recipes);
                   if (vm.recipes == null) {
                     return Center(
                       child: Text(
@@ -68,8 +67,10 @@ class TrendingRecipes extends StatelessWidget {
                 final apiClient = ApiClient(interceptor: AuthInterceptor(
                     secureStorage: const FlutterSecureStorage(),
                 ),);
-                final recipesRepository = RecipesRepository(dioClient: apiClient);
-                final categoryRepository = CategoryRepository(dioClient: apiClient);
+                final recipesRepository = RecipesRepository(apiClient: apiClient);
+                final categoryRepository = CategoryRepository(
+                  apiClient: ApiClient(interceptor: AuthInterceptor(secureStorage: FlutterSecureStorage()))
+                );
                 return RecipeViewModel(
                   recipesRepository: recipesRepository,
                   categoryRepository: categoryRepository,

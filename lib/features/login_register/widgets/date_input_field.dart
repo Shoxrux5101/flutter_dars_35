@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/utils/app_colors.dart';
 
@@ -15,6 +14,34 @@ class DateInputField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: AppColors.redPinkMain,
+              onPrimary: Colors.black,
+              onSurface: Colors.black,
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: AppColors.redPinkMain,
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null) {
+      controller.text = "${picked.day}/${picked.month}/${picked.year}";
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,24 +50,22 @@ class DateInputField extends StatelessWidget {
         Text(
           text,
           style: TextStyle(
-            fontSize: 15.sp,
+            fontSize: 15,
             fontWeight: FontWeight.w500,
             color: AppColors.white,
           ),
         ),
         SizedBox(height: 10.h),
         TextFormField(
-          keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-          ],
           controller: controller,
-          readOnly: false,
+          readOnly: true,
+          onTap: () => _selectDate(context),
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: TextStyle(fontSize: 14),
+            hintStyle: TextStyle(fontSize: 14, color: Colors.black),
+            suffixIcon: Icon(Icons.calendar_month, color: Colors.black),
             contentPadding: EdgeInsets.symmetric(
-              horizontal: 16.w,
+              horizontal: 36.w,
               vertical: 12.h,
             ),
             filled: true,
@@ -50,7 +75,7 @@ class DateInputField extends StatelessWidget {
               borderSide: BorderSide.none,
             ),
           ),
-          style: TextStyle(fontSize: 14),
+          style: TextStyle(fontSize: 14, color: Colors.black),
         ),
       ],
     );

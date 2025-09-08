@@ -6,7 +6,7 @@ import '../../../data/models/login_model.dart';
 import '../../../data/repository/login/login_repository.dart';
 
 class LoginViewModel extends ChangeNotifier {
-  final LoginRepository _repository = LoginRepository(client: ApiClient(interceptor: AuthInterceptor(secureStorage: FlutterSecureStorage())));
+  final LoginRepository _repository = LoginRepository(apiClient: ApiClient(interceptor: AuthInterceptor(secureStorage: FlutterSecureStorage())));
 
   bool isLoading = false;
   String? error;

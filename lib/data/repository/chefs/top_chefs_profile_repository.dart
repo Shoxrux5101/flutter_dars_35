@@ -3,13 +3,13 @@ import '../../../core/network/api_client.dart';
 import '../../../core/utils/result.dart';
 
 class TopChefsProfileRepository {
-  final ApiClient _dioClient;
+  final ApiClient _apiClient;
 
-  TopChefsProfileRepository({required ApiClient dioClient}) : _dioClient = dioClient;
+  TopChefsProfileRepository({required ApiClient apiClient}) : _apiClient = apiClient;
 
   Future<Result<List<RecipeModel>>> getChefsRecipes(int chefId) async {
     try {
-      final result = await _dioClient.get('/recipes/list?UserId=$chefId');
+      final result = await _apiClient.get('/recipes/list?UserId=$chefId');
 
       return result.fold(
             (error) {

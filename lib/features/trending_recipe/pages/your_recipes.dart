@@ -29,8 +29,10 @@ class YourRecipes extends StatelessWidget {
               secureStorage: FlutterSecureStorage(),
             ),
           );
-          final recipesRepository = RecipesRepository(dioClient: apiClient);
-          final categoryRepository = CategoryRepository(dioClient: apiClient);
+          final recipesRepository = RecipesRepository(apiClient: apiClient);
+          final categoryRepository = CategoryRepository(
+            apiClient: ApiClient(interceptor: AuthInterceptor(secureStorage: FlutterSecureStorage()))
+          );
           return RecipeViewModel(
             recipesRepository: recipesRepository,
             categoryRepository: categoryRepository,

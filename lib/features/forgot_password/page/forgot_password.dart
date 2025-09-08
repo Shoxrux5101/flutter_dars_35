@@ -28,7 +28,12 @@ class ForgotPassword extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 37.w),
-        child: EmailInput(),
+        child: Column(
+          children: [
+            EmailInput(),
+
+          ],
+        ),
       ),
         bottomNavigationBar: BottomNavigationBarr(),
 

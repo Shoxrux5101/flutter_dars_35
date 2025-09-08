@@ -38,7 +38,7 @@ class SettingsWidgets extends StatelessWidget {
                 ],
               ),
               IconButton(
-                onPressed: () {Routes.notification;},
+                onPressed: () {Navigator.pushNamed(context, Routes.notification);},
                 icon: SvgPicture.asset(
                   'assets/icons/playSettings.svg',
                 ),
