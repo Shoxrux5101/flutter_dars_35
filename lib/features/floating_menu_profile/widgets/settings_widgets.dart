@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:untitled3/features/floating_menu_profile/pages/delete_account.dart';
 import 'package:untitled3/features/floating_menu_profile/pages/help_center.dart';
 import 'package:untitled3/features/floating_menu_profile/pages/language.dart';
+import 'package:untitled3/features/floating_menu_profile/pages/logout_dialog.dart';
 import 'package:untitled3/features/floating_menu_profile/pages/notification_setting_page.dart';
 import 'package:untitled3/features/floating_menu_profile/pages/privacy_policy.dart';
 import '../../../core/utils/app_colors.dart';
@@ -150,31 +152,41 @@ class SettingsWidgets extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                spacing: 18.w,
-                children: [
-                  SvgPicture.asset('assets/icons/Logout.svg'),
-                  Text(
-                    "Logout",
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.white,
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>LogoutDialog(),),);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  spacing: 18.w,
+                  children: [
+                    SvgPicture.asset('assets/icons/Logout.svg'),
+                    Text(
+                      "Logout",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.white,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
-          Text(
-            "Delete Account",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              color: AppColors.pinkSub,
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>DeleteAccount()));
+            },
+            child: Text(
+              "Delete Account",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: AppColors.pinkSub,
+              ),
             ),
           ),
         ],

@@ -4,8 +4,8 @@ import '../../../core/router/routes.dart';
 import '../../../core/utils/app_colors.dart';
 
 
-class LogoutDialog extends StatelessWidget {
-  const LogoutDialog({Key? key}) : super(key: key);
+class DeleteAccount extends StatelessWidget {
+  const DeleteAccount({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,23 +27,23 @@ class LogoutDialog extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Icon(
-                Icons.logout,
+                Icons.delete,
                 color: AppColors.redPinkMain,
                 size: 32,
               ),
             ),
             SizedBox(height: 20.h),
             Text(
-              'End Sesion',
+              'Delete Account !!!',
               style: TextStyle(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: AppColors.redPinkMain,
               ),
             ),
             SizedBox(height: 12.h),
             Text(
-              'Are you sure you want to logout?',
+              'Are you sure you want \nto delete account?',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
@@ -61,10 +61,10 @@ class LogoutDialog extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     child: Container(
-                      height: 48.h,
+                      height: 26.h,
                       decoration: BoxDecoration(
                         color: AppColors.pink,
-                        borderRadius: BorderRadius.circular(8.r),
+                        borderRadius: BorderRadius.circular(18.r),
                         border: Border.all(
                           color: AppColors.redPinkMain,
                         ),
@@ -73,7 +73,7 @@ class LogoutDialog extends StatelessWidget {
                         child: Text(
                           'Cancel',
                           style: TextStyle(
-                            fontSize: 16.sp,
+                            fontSize: 13.sp,
                             fontWeight: FontWeight.w600,
                             color: AppColors.redPinkMain,
                           ),
@@ -93,16 +93,17 @@ class LogoutDialog extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      height: 48.h,
+                      height: 26.h,
+                      width: 140,
                       decoration: BoxDecoration(
                         color: AppColors.redPinkMain,
-                        borderRadius: BorderRadius.circular(8.r),
+                        borderRadius: BorderRadius.circular(18.r),
                       ),
                       child: Center(
                         child: Text(
-                          'Yes, End Sesion',
+                          'Yes,Delete account',
                           style: TextStyle(
-                            fontSize: 16.sp,
+                            fontSize: 13,
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
                           ),
@@ -119,41 +120,3 @@ class LogoutDialog extends StatelessWidget {
     );
   }
 }
-//
-// class DialogHelper {
-//   static void showLogoutDialog(BuildContext context) {
-//     showDialog(
-//       context: context,
-//       barrierDismissible: true,
-//       builder: (BuildContext context) {
-//         return LogoutDialog();
-//       },
-//     );
-//   }
-// }
-//
-// class ExampleUsage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         actions: [
-//           IconButton(
-//             onPressed: () {
-//               DialogHelper.showLogoutDialog(context);
-//             },
-//             icon: Icon(Icons.logout),
-//           ),
-//         ],
-//       ),
-//       body: Center(
-//         child: ElevatedButton(
-//           onPressed: () {
-//             DialogHelper.showLogoutDialog(context);
-//           },
-//           child: Text('Logout'),
-//         ),
-//       ),
-//     );
-//   }
-// }
