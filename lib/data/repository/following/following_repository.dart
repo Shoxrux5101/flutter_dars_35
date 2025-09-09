@@ -8,7 +8,6 @@ class FollowingRepository {
 
   Future<Result<List<FollowingModel>>> fetchFollowing() async {
     final result = await apiClient.get("/user/following");
-
     return result.fold(
           (error) => Result.error(error),
           (data) {

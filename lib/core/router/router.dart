@@ -22,7 +22,7 @@ import '../../features/trending_recipe/pages/your_recipes.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.settings,
+    initialLocation: Routes.onboarding,
     routes: [
       GoRoute(
         path: Routes.onboarding,

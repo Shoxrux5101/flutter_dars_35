@@ -56,7 +56,7 @@ class AuthInterceptor extends Interceptor {
     await secureStorage.delete(key: 'token');
     await secureStorage.delete(key: 'login');
     await secureStorage.delete(key: 'password');
-    AppRouter.router.go(Routes.loginPage);
+    // AppRouter.router.go(Routes.loginPage);
     return;
   }
 

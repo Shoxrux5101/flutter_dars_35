@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:untitled3/data/repository/profile/profile_repository.dart';
-
 import '../../../data/models/profile_model.dart';
-
 
 class ProfileViewModel extends ChangeNotifier {
   final ProfileRepository profileRepository;
-
   ProfileViewModel({required this.profileRepository});
 
   ProfileModel? _profile;
@@ -23,7 +20,7 @@ class ProfileViewModel extends ChangeNotifier {
     _error = null;
     notifyListeners();
 
-    final result = await profileRepository.fetchProfile();
+    final result = await profileRepository.getProfile();
     result.fold(
           (err) {
         _error = err.toString();
@@ -33,7 +30,6 @@ class ProfileViewModel extends ChangeNotifier {
         _profile = data;
       },
     );
-
     _isLoading = false;
     notifyListeners();
   }

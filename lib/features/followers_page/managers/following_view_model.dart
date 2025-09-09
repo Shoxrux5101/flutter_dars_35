@@ -15,20 +15,22 @@ class FollowingViewModel extends ChangeNotifier {
     isLoading = true;
     errorMessage = null;
     notifyListeners();
-
     final result = await repository.fetchFollowing();
-
     result.fold(
           (error) {
         errorMessage = error.toString();
         following = [];
-        print(following);
       },
           (data) {
         following = data;
       },
     );
     isLoading = false;
+    notifyListeners();
+  }
+
+  void removeUser(int id) {
+    following.removeWhere((u) => u.id == id);
     notifyListeners();
   }
 }
