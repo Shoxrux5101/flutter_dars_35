@@ -67,7 +67,7 @@ class TopChefsProfileHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildStat(chefsModel.recipesCount, "Recipes"),
-              Container(width: 1.w, height: 26.h, color: AppColors.white),
+              GestureDetector(onTap: (){}, child: Container(width: 1.w, height: 26.h, color: AppColors.white)),
               _buildStat(chefsModel.followingCount, "Following"),
               Container(width: 1.w, height: 26.h, color: AppColors.white),
               _buildStat(chefsModel.followerCount, "Followers"),

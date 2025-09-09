@@ -21,7 +21,6 @@ class TopChefsViewModel extends ChangeNotifier {
     notifyListeners();
 
     final result = await _repository.getChefs(ids);
-
     result.fold(
           (error) {
         errorMessage = error.toString();

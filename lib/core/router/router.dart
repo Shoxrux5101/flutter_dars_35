@@ -8,7 +8,7 @@ import 'package:untitled3/features/forgot_password/page/forgot_password.dart';
 import 'package:untitled3/features/onboarding/pages/onboarding_page.dart';
 import 'package:untitled3/features/profile/pages/profile_page.dart';
 import 'package:untitled3/features/trending_recipe/pages/trending_recipes_details.dart';
-import '../../features/floating_menu_profile/pages/notification_page.dart';
+import '../../features/floating_menu_profile/pages/notification_setting_page.dart';
 import '../../features/floating_menu_profile/pages/settings.dart';
 import '../../features/followers_page/pages/following_page.dart';
 import '../../features/home_page/page/home_page.dart';
@@ -22,7 +22,7 @@ import '../../features/trending_recipe/pages/your_recipes.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.communityPage,
+    initialLocation: Routes.settings,
     routes: [
       GoRoute(
         path: Routes.onboarding,
@@ -90,21 +90,16 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: Routes.trendingRecipeDetailsPage,
+        path: '/trending-recipes/:id',
         builder: (context, state) {
-          final extra = state.extra as Map<String, dynamic>;
-          final recipeId = extra['id'];
+          final recipeId = int.parse(state.pathParameters['id']!);
           return TrendingRecipesDetails(recipeId: recipeId);
         },
       ),
       GoRoute(
         path: Routes.yourRecipePage,
         builder: (context, state) {
-          final extra = state.extra as Map<String, dynamic>;
-          final catId = extra['id'];
-          return YourRecipes(
-            catId: catId,
-          );
+          return YourRecipes();
         },
       ),
       GoRoute(
@@ -148,9 +143,9 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: Routes.notification,
+        path: Routes.notificationSetting,
         builder: (context, state) {
-          return NotificationPage();
+          return NotificationSettingPage();
         },
       ),
       GoRoute(

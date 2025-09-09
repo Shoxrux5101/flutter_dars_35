@@ -36,7 +36,7 @@ class TopChefsProfile extends StatelessWidget {
             return Scaffold(body: Center(child: Text(vm.errorMessage!)));
           }
           return Scaffold(
-            backgroundColor: Color(0xFF1C0F0D),
+            // backgroundColor: Color(0xFF1C0F0D),
             extendBody: true,
             appBar: TopChefsProfileAppBar(chefsModel: chefsModel),
             body: Padding(

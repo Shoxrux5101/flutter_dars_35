@@ -10,7 +10,6 @@ class ChefsRepository {
   Future<Result<List<ChefsModel>>> getChefs(List<int> ids) async {
     try {
       final List<ChefsModel> chefs = [];
-
       for (final id in ids) {
         final result = await _dioClient.get('/auth/details/$id');
 
@@ -27,7 +26,6 @@ class ChefsRepository {
           },
         );
       }
-
       return Result.ok(chefs);
     } catch (e, s) {
       print("Exception: $e");

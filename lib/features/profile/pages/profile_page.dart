@@ -10,7 +10,6 @@ import '../../../core/network/api_client.dart';
 import '../../../core/router/routes.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
-import '../../../core/widgets/custom_app_bar.dart';
 import '../managers/favourite_view_model.dart';
 import '../managers/profile_view_model.dart';
 import '../widgets/recipe_detail_widget.dart';
@@ -34,6 +33,7 @@ class ProfilePage extends StatelessWidget {
       ],
       child: SafeArea(
         child: Scaffold(
+          extendBody: true,
           bottomNavigationBar: BottomNavigation(),
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(kToolbarHeight),
@@ -54,7 +54,6 @@ class ProfilePage extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 46.w),
                             child: Text(vm.profile!.username,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15,color: AppColors.pinkSub,),),
                           ),
-
                         ],
                       ),
                       

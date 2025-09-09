@@ -23,7 +23,7 @@ class CommunityModel {
 
   factory CommunityModel.fromJson(Map<String, dynamic> json) {
     return CommunityModel(
-      id: json['id'] ?? 0,
+      id: (json['id']) ?? 0,
       title: json['title'] ?? "",
       description: json['description'] ?? "",
       photo: json['photo'] ?? "",

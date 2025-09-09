@@ -16,9 +16,10 @@ class RecipesRepository {
               return Result.error(error);},
             (data) {
 
-          final recipes = (data as List)
-              .map((json) => RecipeModel.fromJson(json))
-              .toList();
+              final recipes = (data as List)
+                  .where((e) => e != null)
+                  .map((e) => RecipeModel.fromJson(e as Map<String, dynamic>))
+                  .toList();
           return Result.ok(recipes);
         },
       );

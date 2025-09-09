@@ -4,8 +4,9 @@ import 'package:untitled3/core/widgets/custom_toggle.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
 
-class NotificationPage extends StatelessWidget {
-  const NotificationPage({super.key});
+class NotificationSettingPage extends StatelessWidget {
+  const NotificationSettingPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {

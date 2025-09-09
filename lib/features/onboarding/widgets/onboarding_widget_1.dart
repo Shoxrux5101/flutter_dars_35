@@ -8,7 +8,7 @@ class OnboardingWidget1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1C0F0D),
+      backgroundColor: Color(0xFF1C0F0D),
       body: Stack(
         children: [
           Positioned.fill(

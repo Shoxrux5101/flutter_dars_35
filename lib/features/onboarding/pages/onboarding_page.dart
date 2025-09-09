@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:untitled3/core/router/routes.dart';
 import 'package:untitled3/features/onboarding/managers/onboarding_view_model.dart';
 import 'package:untitled3/features/onboarding/widgets/cooking_level.dart';
 import 'package:untitled3/features/onboarding/widgets/onboarding_widget_3.dart';
@@ -57,6 +59,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             );
           }
           return Scaffold(
+            extendBody: true,
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               leading: IconButton(
@@ -78,9 +81,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
               bottom: PreferredSize(
                 preferredSize: Size.fromHeight(20.h),
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
+                  padding: EdgeInsets.only(bottom: 10),
                   child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
+                    duration: Duration(milliseconds: 300),
                     width: 230.w,
                     height: 12.h,
                     curve: Curves.easeInOut,
@@ -116,8 +119,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 Center(child: Allergic()),
               ],
             ),
-            bottomNavigationBar: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 37.w, vertical: 24.h),
+            bottomNavigationBar: Container(
+              padding: EdgeInsets.only(left: 36,right: 36,bottom: 60),
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [AppColors.beige,Colors.transparent],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                  )
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -139,17 +149,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         ),
                       ),
                     ),
-                    const Spacer(),
+                    Spacer(),
                   ],
                   GestureDetector(
                     onTap: () {
                       if (currentPage < 2) {
                         _pageController.nextPage(
-                          duration: const Duration(milliseconds: 300),
+                          duration: Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                         );
                       } else {
-                        Navigator.pushReplacementNamed(context, '/home');
+                        context.go(Routes.homePage);
                       }
                     },
                     child: Container(

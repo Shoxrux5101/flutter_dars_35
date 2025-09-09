@@ -16,21 +16,25 @@ class ReviewsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: backColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
+    return SizedBox(
+      width: 168,
+      height: 29,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: backColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          padding: EdgeInsets.zero,
         ),
-        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-      ),
-      onPressed: onPressed,
-      child: Text(
-        text,
-        style: TextStyle(
-          color: textColor,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: textColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );

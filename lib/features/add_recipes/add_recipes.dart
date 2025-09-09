@@ -248,7 +248,7 @@ class _RecipeCreatorPageState extends State<AddResipeisPage>
                             ingredients: ingredients,
                             removeIngredient: _removeIngredient,
                           )),
-                          AddButton('+ Add Ingredient', _addIngredient),
+                          Center(child: AddButton('+ Add Ingredient', _addIngredient)),
                           SizedBox(height: 20),
                           SectionTitle('Instructions'),
                           ...instructions
@@ -259,7 +259,7 @@ class _RecipeCreatorPageState extends State<AddResipeisPage>
                             instructions: instructions,
                             removeInstruction: _removeInstruction,
                           )),
-                          AddButton('+ Add Step', _addInstruction),
+                          Center(child: AddButton('+ Add Instruction', _addInstruction)),
                           SizedBox(height: 30),
                         ],
                       ),

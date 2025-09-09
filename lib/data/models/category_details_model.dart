@@ -31,23 +31,23 @@ class CategoryDetailsModel {
 
   factory CategoryDetailsModel.fromJson(Map<String, dynamic> json) {
     return CategoryDetailsModel(
-      id: json['id'],
-      categoryId: json['categoryId'],
-      title: json['title'],
-      description: json['description'],
-      photo: json['photo'],
-      videoRecipe: json['videoRecipe'],
-      timeRequired: json['timeRequired'],
-      rating: json['rating'],
-      reviewsCount: json['reviewsCount'],
-      difficulty: json['difficulty'],
-      user: UserModel.fromJson(json['user']),
-      instructions: (json['instructions'] as List)
-          .map((e) => InstructionModel.fromJson(e))
-          .toList(),
-      ingredients: (json['ingredients'] as List)
-          .map((e) => IngredientModel.fromJson(e))
-          .toList(),
+      id: (json['id'] as num?)?.toInt() ?? 0,
+      categoryId: (json['categoryId'] as num?)?.toInt() ?? 0,
+      title: json['title']?.toString() ?? "",
+      description: json['description']?.toString() ?? "",
+      photo: json['photo']?.toString() ?? "",
+      videoRecipe: json['videoRecipe']?.toString() ?? "",
+      timeRequired: (json['timeRequired'] as num?)?.toInt() ?? 0,
+      reviewsCount: (json['reviewsCount'] as num?)?.toInt() ?? 0,
+      rating: (json['rating'] as num?)?.toInt() ?? 0,
+      difficulty: json['difficulty']?.toString() ?? "",
+      user: UserModel.fromJson(json['user'] as Map<String, dynamic>? ?? {}),
+      instructions: (json['instructions'] as List<dynamic>?)
+          ?.map((e) => InstructionModel.fromJson(e as Map<String, dynamic>))
+          .toList() ?? [],
+      ingredients: (json['ingredients'] as List<dynamic>?)
+          ?.map((e) => IngredientModel.fromJson(e as Map<String, dynamic>))
+          .toList() ?? [],
     );
   }
 }

@@ -4,6 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled3/core/router/routes.dart';
+import 'package:untitled3/features/floating_menu_profile/pages/notification_setting_page.dart';
+import 'package:untitled3/features/home_page/widgets/notification_page.dart';
+import 'package:untitled3/features/home_page/widgets/search_filter_sheet.dart';
 import 'package:untitled3/features/recipes/managers/recipe_view_model.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../data/repository/categories/category_repository.dart';
@@ -74,9 +77,36 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                         padding: EdgeInsets.only(right: 38.w, bottom: 27.h),
                         child: Row(
                           children: [
-                            SvgPicture.asset('assets/icons/notification.svg'),
-                            SizedBox(width: 5.w),
-                            SvgPicture.asset('assets/icons/search.svg'),
+                            IconButton(onPressed: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationsPage()));
+                            }, icon: SvgPicture.asset('assets/icons/Notification Button.svg'),),
+                            IconButton(
+                              onPressed: () async {
+                                final selectedFilters = await showGeneralDialog<List<String>>(
+                                  context: context,
+                                  barrierDismissible: true,
+                                  barrierLabel: "Dismiss",
+                                  transitionDuration: const Duration(milliseconds: 200),
+                                  pageBuilder: (context, anim1, anim2) {
+                                    return const SizedBox.shrink();
+                                  },
+                                  transitionBuilder: (context, anim1, anim2, child) {
+                                    return SlideTransition(
+                                      position: Tween<Offset>(
+                                        begin: const Offset(1, -1),
+                                        end: Offset.zero,
+                                      ).animate(CurvedAnimation(
+                                        parent: anim1,
+                                        curve: Curves.easeOutCubic,
+                                      )),
+                                      child: SearchFilterDialog(),
+                                    );
+                                  },
+                                );
+                              },
+                              icon: SvgPicture.asset('assets/icons/Search Button.svg'),
+                            ),
+
                           ],
                         ),
                       ),
@@ -100,10 +130,6 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                             child: GestureDetector(
                               onTap: () {
                                 vm.changeCategory(category.id);
-                                context.push(
-                                  Routes.recipePage,
-                                  extra: category.id,
-                                );
                               },
                               child: Container(
                                 height: 25.h,

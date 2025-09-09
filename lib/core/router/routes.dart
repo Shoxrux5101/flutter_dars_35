@@ -18,6 +18,6 @@ class Routes {
   static String addRecipes = '/add-recipes';
   static String profile = '/profile';
   static String settings = '/floating_menu_profile';
-  static String notification = '/notification';
+  static String notificationSetting = '/notification';
   static String followers = '/follower';
 }

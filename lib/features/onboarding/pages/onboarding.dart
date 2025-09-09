@@ -17,7 +17,7 @@ class _OnboardingState extends State<Onboarding> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 1), () {
       if (mounted) {
         Navigator.push(context, MaterialPageRoute(builder: (context) => OnboardingWidget1()));
       }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:untitled3/features/categories/managers/category_page_view_model.dart';
 import '../../../core/utils/app_colors.dart';
-import '../managers/onboarding_view_model.dart';
 
 class Preferences extends StatelessWidget {
   const Preferences({super.key});
@@ -10,12 +10,13 @@ class Preferences extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => OnboardingViewModel(),
-      child: Consumer<OnboardingViewModel>(
+      create: (_) => CategoryPageViewModel(),
+      child: Consumer<CategoryPageViewModel>(
         builder: (context, vm, child) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 36),
+            padding: EdgeInsets.symmetric(horizontal: 36),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 16.h),
@@ -37,8 +38,8 @@ class Preferences extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20.h),
-                if (vm.isOnboardingLoading)
-                  const Expanded(
+                if (vm.isCuisinesLoading)
+                  Expanded(
                     child: Center(
                       child: CircularProgressIndicator(),
                     ),
@@ -56,16 +57,17 @@ class Preferences extends StatelessWidget {
                 else
                   Expanded(
                     child: GridView.builder(
-                      itemCount: vm.onboarding.length,
+                      itemCount: vm.categories.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         crossAxisSpacing: 12,
-                        mainAxisSpacing: 10,
-                        mainAxisExtent: 122,
+                        mainAxisSpacing: 6,
+                        mainAxisExtent: 140,
                       ),
                       itemBuilder: (context, index) {
-                        final item = vm.onboarding[index];
+                        final item = vm.categories[index];
                         return Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(16),

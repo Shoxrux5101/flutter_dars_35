@@ -11,6 +11,7 @@ import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
 import '../../../data/repository/reviews/reviews_repository.dart';
 import '../managers/reviews_view_model.dart';
+import '../widget/leave_review_page.dart';
 import '../widget/rating_stars.dart';
 
 class ReviewsPage extends StatelessWidget {
@@ -178,14 +179,14 @@ class ReviewsPage extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => LeaveReviewPage(
-                                //       id: vm.id,
-                                //     ),
-                                //   ),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LeaveReviewPage(
+                                      id: vm.id,
+                                    ),
+                                  ),
+                                );
                               },
                               child: Container(
                                 alignment: Alignment.center,

@@ -21,44 +21,43 @@ class TrendingRecipes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: CustomAppBar(title: 'Trending Recipes'),
       body: Column(
         children: [
-          Expanded(
-            child: ChangeNotifierProvider(
-              create: (context) {
-                final vm = TrendingRecipesViewModel(
-                  repository: TrendingRecipesRepository(apiClient: ApiClient(interceptor: AuthInterceptor(
-                    secureStorage: FlutterSecureStorage(),
-                  ),)),
-                );
-                vm.fetchTrendingRecipes();
-                return vm;
-              },
-              builder: (context, child) => Consumer<TrendingRecipesViewModel>(
-                builder: (context, vm, child) {
-                  if (vm.isLoading) {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                  if (vm.recipes == null) {
-                    return Center(
-                      child: Text(
-                        'Trending malumotlar topilmadi',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    );
-                  }
-                  final recipe = vm.recipes!;
-                  return Column(
-                    children: [
-                      MostViewToday(
-                        vm: vm,
-                        recipe: recipe,
-                      ),
-                    ],
+          ChangeNotifierProvider(
+            create: (context) {
+              final vm = TrendingRecipesViewModel(
+                repository: TrendingRecipesRepository(apiClient: ApiClient(interceptor: AuthInterceptor(
+                  secureStorage: FlutterSecureStorage(),
+                ),)),
+              );
+              vm.fetchTrendingRecipes();
+              return vm;
+            },
+            builder: (context, child) => Consumer<TrendingRecipesViewModel>(
+              builder: (context, vm, child) {
+                if (vm.isLoading) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (vm.recipes == null) {
+                  return Center(
+                    child: Text(
+                      'Trending malumotlar topilmadi',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
                   );
-                },
-              ),
+                }
+                final recipe = vm.recipes!;
+                return Column(
+                  children: [
+                    MostViewToday(
+                      vm: vm,
+                      recipe: recipe,
+                    ),
+                  ],
+                );
+              },
             ),
           ),
           Expanded(
@@ -93,7 +92,7 @@ class TrendingRecipes extends StatelessWidget {
                   return RecipeList(
                     vm: vm,
                     onRecipeTap: (int recipeId) {
-                      context.go(
+                      context.push(
                         Routes.trendingRecipeDetailsPage,
                         extra: {"id": recipeId},
                       );

@@ -7,6 +7,7 @@ import '../../top_chefs/managers/top_chefs_view_model.dart';
 class TopChefWidget extends StatefulWidget {
   final List<dynamic> jsonData;
 
+
   const TopChefWidget({super.key, required this.jsonData});
 
   @override
@@ -15,11 +16,12 @@ class TopChefWidget extends StatefulWidget {
 class _TopChefWidgetState extends State<TopChefWidget> {
   late TopChefsViewModel vm;
 
+
   @override
   void initState() {
     super.initState();
     vm = TopChefsViewModel(repository: context.read());
-    vm.fetchTopViewedChefs(vm.topChefs.cast<int>());
+    vm.fetchTopViewedChefs(widget.jsonData.cast<int>());
   }
   @override
   Widget build(BuildContext context) {
@@ -33,8 +35,11 @@ class _TopChefWidgetState extends State<TopChefWidget> {
           if (vm.errorMessage != null) {
             return Center(child: Text('Error: ${vm.errorMessage}'));
           }
+          if(vm.topChefs.isEmpty){
+            return Center(child: Text("chefs list bo'sh kelyapti",style: TextStyle(color: AppColors.white),),);
+          }
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 38.w, vertical: 19.h),
+            padding: EdgeInsets.symmetric(horizontal: 36.w, vertical: 19.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -56,7 +61,7 @@ class _TopChefWidgetState extends State<TopChefWidget> {
                     itemBuilder: (context, index) {
                       final chef = vm.topChefs[index];
                       return Padding(
-                        padding: EdgeInsets.only(right: 20.w),
+                        padding: EdgeInsets.only(right: 9.w),
                         child: Column(
                           children: [
                             ClipRRect(

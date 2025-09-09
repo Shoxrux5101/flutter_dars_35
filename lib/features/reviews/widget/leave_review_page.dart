@@ -8,6 +8,7 @@ import 'package:untitled3/core/authInterceptor.dart';
 import 'package:untitled3/features/reviews/widget/reviews_button.dart';
 
 import '../../../core/network/api_client.dart';
+import '../../../core/router/routes.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/bottom_navigation_bar/bottom_navigation.dart';
 import '../../../data/repository/reviews/reviews_repository.dart';
@@ -267,7 +268,7 @@ class _LeaveReviewPageState extends State<LeaveReviewPage> {
                           ],
                         ),
                         SizedBox(
-                          height: 110.h,
+                          height: 49.h,
                         ),
                         Row(
                           spacing: 19,
@@ -346,7 +347,7 @@ class _LeaveReviewPageState extends State<LeaveReviewPage> {
                                         Center(
                                           child: GestureDetector(
                                             onTap: () {
-                                              context.go('/homePage');
+                                              context.go(Routes.homePage);
                                             },
                                             child: Container(
                                               alignment: Alignment.center,

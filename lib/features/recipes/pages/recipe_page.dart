@@ -51,7 +51,7 @@ class RecipePage extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 40.h,
+                     height: 40.h,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: vm.categories.length,

@@ -84,27 +84,30 @@ class _CommunityPageState extends State<CommunityPage> {
                               ),
                             ),
                             SizedBox(width: 14.w),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '@${items.user.username}',
-                                  style: TextStyle(
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.white,
+                            Expanded(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '@${items.user.username}',
+                                    style: TextStyle(
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.white,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
-                                Text(
-                                  '${items.created.month} Month ago',
-                                  style: TextStyle(
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.white,
+                                  Text(
+                                    '${items.created.month} Month ago',
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -142,96 +145,100 @@ class _CommunityPageState extends State<CommunityPage> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      items.title,
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        items.title,
+                                        style: TextStyle(
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.white,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    SizedBox(width: 6.w),
+                                    SvgPicture.asset(
+                                      "assets/icons/star.svg",
+                                      color: AppColors.white,
+                                      width: 10.w,
+                                    ),
+                                    Text(
+                                      items.rating.toString(),
                                       style: TextStyle(
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w400,
                                         color: AppColors.white,
                                       ),
-                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                  ),
-                                  SizedBox(width: 6.w),
-                                  SvgPicture.asset(
-                                    "assets/icons/star.svg",
-                                    color: AppColors.white,
-                                    width: 10.w,
-                                  ),
-                                  Text(
-                                    items.rating.toString(),
-                                    style: TextStyle(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.white,
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                               SizedBox(height: 8.h),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      items.description,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w300,
-                                        color: AppColors.white,
+                              Expanded(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        items.description,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w300,
+                                          color: AppColors.white,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(width: 16.w),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            "assets/icons/clock.svg",
-                                            color: AppColors.white,
-                                            width: 10.w,
-                                          ),
-                                          SizedBox(width: 3.w),
-                                          Text(
-                                            '${items.timeRequired} min',
-                                            style: TextStyle(
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.w400,
+                                    SizedBox(width: 16.w),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              "assets/icons/clock.svg",
                                               color: AppColors.white,
+                                              width: 10.w,
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 4.h),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            items.reviewsCount.toString(),
-                                            style: TextStyle(
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.w400,
+                                            SizedBox(width: 3.w),
+                                            Text(
+                                              '${items.timeRequired} min',
+                                              style: TextStyle(
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w400,
+                                                color: AppColors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 4.h),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              items.reviewsCount.toString(),
+                                              style: TextStyle(
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w400,
+                                                color: AppColors.white,
+                                              ),
+                                            ),
+                                            SizedBox(width: 3.w),
+                                            SvgPicture.asset(
+                                              "assets/icons/reviews.svg",
                                               color: AppColors.white,
+                                              width: 10.w,
                                             ),
-                                          ),
-                                          SizedBox(width: 3.w),
-                                          SvgPicture.asset(
-                                            "assets/icons/reviews.svg",
-                                            color: AppColors.white,
-                                            width: 10.w,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

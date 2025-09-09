@@ -13,7 +13,6 @@ class YourRecipeList extends StatelessWidget {
     required this.vm,
     this.onRecipeTap,
   });
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,119 +30,127 @@ class YourRecipeList extends StatelessWidget {
             itemCount: vm.recipes.length,
             itemBuilder: (context, index) {
               final recipe = vm.recipes[index];
-              return SizedBox(
-                width: 170.w,
-                height: 226.h,
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: EdgeInsets.only(right:20),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 6),
-                          width: 160.w,
-                          height: 76.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(14),
-                              bottomLeft: Radius.circular(14),
+              return GestureDetector(
+                onTap: () {
+                  if (onRecipeTap != null && recipe.id != null) {
+                    onRecipeTap!(recipe.id);
+                  }
+                },
+                child: SizedBox(
+                  width: 170.w,
+                  height: 226.h,
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: EdgeInsets.only(right:20),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 6),
+                            width: 160.w,
+                            height: 76.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(14),
+                                bottomLeft: Radius.circular(14),
+                              ),
+                              color: AppColors.white,
                             ),
-                            color: AppColors.white,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                recipe.title,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Text(
-                                recipe.description,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(height: 2.h),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      SvgPicture.asset('assets/icons/clock.svg'),
-                                      SizedBox(width: 6.w),
-                                      Text(
-                                        '${recipe.timeRequired} min',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: AppColors.pinkSub,
-                                        ),
-                                      ),
-                                    ],
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  recipe.title,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black,
                                   ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        '${recipe.rating}',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: AppColors.pinkSub,
-                                        ),
-                                      ),
-                                      SizedBox(width: 5.w),
-                                      SvgPicture.asset('assets/icons/star.svg'),
-                                    ],
+                                ),
+                                Text(
+                                  recipe.description,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.black,
                                   ),
-                                ],
-                              ),
-                            ],
+                                ),
+                                SizedBox(height: 2.h),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SvgPicture.asset('assets/icons/clock.svg'),
+                                        SizedBox(width: 6.w),
+                                        Text(
+                                          '${recipe.timeRequired} min',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: AppColors.pinkSub,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          '${recipe.rating}',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: AppColors.pinkSub,
+                                          ),
+                                        ),
+                                        SizedBox(width: 5.w),
+                                        SvgPicture.asset('assets/icons/star.svg'),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(14),
-                      child: Image.network(
-                        recipe.photo,
-                        alignment: Alignment.topCenter,
-                        fit: BoxFit.cover,
-                        width: 170.w,
-                        height: 153.h,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Image.network(
+                          recipe.photo,
+                          alignment: Alignment.topCenter,
+                          fit: BoxFit.cover,
+                          width: 170.w,
+                          height: 153.h,
+                        ),
                       ),
-                    ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 28.w, top: 7.h),
-                        child: IconButton(
-                          padding: EdgeInsets.zero,
-                          constraints: BoxConstraints(),
-                          onPressed: () {
-                            if (recipe.id != null) {
-                              vm.toggleLike(recipe.id);
-                            }
-                          },
-                          icon: SvgPicture.asset(
-                            vm.likedItems.contains(recipe.id)
-                                ? 'assets/icons/dislike.svg'
-                                : 'assets/icons/like.svg',
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 28.w, top: 7.h),
+                          child: IconButton(
+                            padding: EdgeInsets.zero,
+                            constraints: BoxConstraints(),
+                            onPressed: () {
+                              if (recipe.id != null) {
+                                vm.toggleLike(recipe.id);
+                              }
+                            },
+                            icon: SvgPicture.asset(
+                              vm.likedItems.contains(recipe.id)
+                                  ? 'assets/icons/dislike.svg'
+                                  : 'assets/icons/like.svg',
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },
+
           )
         ),
       ],
